@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taha's Engineering Study Notes</title>
+<style>
+:root{
+  --navy:#16395f;
+  --blue:#245d93;
+  --gold:#b58a2a;
+  --bg:#f4f7fb;
+  --paper:#ffffff;
+  --text:#1b2735;
+  --muted:#667384;
+  --line:#dce3eb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+header{
+  background:linear-gradient(135deg,#102b49,#1f5689);
+  color:white;
+  padding:64px 22px 56px;
+}
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+}
+.kicker{
+  color:#e3c36f;
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+h1{
+  font-size:clamp(2.1rem,5vw,3.8rem);
+  margin:.35rem 0 .5rem;
+  line-height:1.08;
+}
+header p{
+  max-width:720px;
+  margin:0;
+  color:#d9e5ef;
+  font-size:1.05rem;
+}
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:36px 22px 70px;
+}
+.section-title{
+  margin:10px 0 18px;
+  font-size:1.15rem;
+  color:var(--navy);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+.course{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  box-shadow:0 10px 28px rgba(23,46,74,.06);
+}
+.course-code{
+  font-size:.78rem;
+  color:var(--gold);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:850;
+}
+.course h2{
+  margin:.35rem 0 .3rem;
+  color:var(--navy);
+  font-size:1.45rem;
+}
+.course .desc{
+  color:var(--muted);
+  margin:0 0 18px;
+}
+.lecture-list{
+  display:grid;
+  gap:9px;
+}
+.lecture-list a,.placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  text-decoration:none;
+  color:#23425f;
+  background:#f8fafc;
+  border:1px solid #e4e9ef;
+  border-radius:10px;
+  padding:11px 13px;
+  font-size:.94rem;
+}
+.lecture-list a:hover{
+  border-color:#9db6cf;
+  background:#f1f6fb;
+}
+.arrow{
+  color:var(--gold);
+  font-weight:900;
+}
+.placeholder{
+  color:#8793a1;
+}
+.note{
+  margin-top:30px;
+  border-left:4px solid var(--gold);
+  background:#fffaf0;
+  padding:14px 16px;
+  border-radius:0 10px 10px 0;
+  color:#5a4b25;
+}
+footer{
+  text-align:center;
+  color:#7b8794;
+  font-size:.85rem;
+  padding:22px;
+}
+@media(max-width:760px){
+  .grid{grid-template-columns:1fr}
+  header{padding-top:46px}
+  .course{padding:20px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="kicker">University Study Hub</div>
+    <h1>Taha's Engineering Study Notes</h1>
+    <p>Organized lecture notes, review materials, equations, and study resources for Chemical Engineering courses.</p>
+  </div>
+</header>
+
+<main>
+  <div class="section-title">Current Courses</div>
+  <div class="grid">
+
+    <section class="course">
+      <div class="course-code">CHEE 6333</div>
+      <h2>Transport Processes</h2>
+      <p class="desc">Lecture notes and study resources.</p>
+      <div class="lecture-list">
+        <div class="placeholder">Lectures coming soon</div>
+      </div>
+    </section>
+
+    <section class="course">
+      <div class="course-code">CHEE 6335</div>
+      <h2>Statistical Thermodynamics</h2>
+      <p class="desc">Master lecture notes with English technical content and separate Persian explanations.</p>
+      <div class="lecture-list">
+        <a href="CHEE6335_L01_Master.html"><span>Lecture 01</span><span class="arrow">→</span></a>
+        <a href="CHEE6335_L02_Master.html"><span>Lecture 02</span><span class="arrow">→</span></a>
+        <a href="CHEE6335_L03_Master.html"><span>Lecture 03</span><span class="arrow">→</span></a>
+        <a href="CHEE6335_L04_Master.html"><span>Lecture 04</span><span class="arrow">→</span></a>
+        <a href="CHEE6335_L05_Master.html"><span>Lecture 05</span><span class="arrow">→</span></a>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="note">
+    More courses, exam reviews, formula sheets, and resources can be added here later without changing the overall site structure.
+  </div>
+</main>
+
+<footer>Personal academic study site</footer>
+</body>
+</html>
