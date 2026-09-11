@@ -1,1 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHEE 6335 — Statistical Thermodynamics</title>
+<style>
+:root{
+  --navy:#16395f;
+  --blue:#245d93;
+  --gold:#b58a2a;
+  --bg:#f4f7fb;
+  --paper:#ffffff;
+  --text:#1b2735;
+  --muted:#667384;
+  --line:#dce3eb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+.topbar{
+  background:#0f2d4b;
+  color:#fff;
+  padding:12px 20px;
+}
+.topbar-inner{
+  max-width:1080px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+.topbar a{color:#fff;text-decoration:none;font-weight:700}
+.hero{
+  background:linear-gradient(135deg,#173b62,#2a6499);
+  color:white;
+  padding:54px 22px 48px;
+}
+.hero-inner{max-width:1080px;margin:auto}
+.kicker{
+  color:#e5c978;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:800;
+  font-size:.78rem;
+}
+h1{
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.08;
+  margin:.4rem 0 .7rem;
+}
+.hero p{margin:0;max-width:760px;color:#dce8f2}
+main{max-width:1080px;margin:auto;padding:34px 22px 70px}
+.section-title{
+  color:var(--navy);
+  font-size:1.2rem;
+  margin:0 0 16px;
+}
+.lecture-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:18px 20px;
+  box-shadow:0 8px 22px rgba(24,48,76,.05);
+}
+.card:hover{
+  border-color:#9fb7cf;
+  transform:translateY(-1px);
+}
+.card .num{
+  color:var(--gold);
+  font-weight:850;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.card h2{
+  margin:.25rem 0 .35rem;
+  font-size:1.12rem;
+  color:var(--navy);
+}
+.card p{margin:0;color:var(--muted);font-size:.92rem}
+.resources{
+  margin-top:30px;
+  background:#fffaf0;
+  border-left:4px solid var(--gold);
+  padding:15px 17px;
+  border-radius:0 10px 10px 0;
+  color:#5f512e;
+}
+footer{
+  text-align:center;
+  color:#7d8895;
+  font-size:.84rem;
+  padding:20px;
+}
+@media(max-width:720px){
+  .lecture-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="../index.html">← All Courses</a>
+    <span>CHEE 6335</span>
+  </div>
+</div>
 
+<section class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Chemical Engineering Study Notes</div>
+    <h1>CHEE 6335 — Statistical Thermodynamics</h1>
+    <p>Master lecture notes with English technical content and separate Persian explanations, organized for study, review, and exam preparation.</p>
+  </div>
+</section>
+
+<main>
+  <h2 class="section-title">Lectures</h2>
+  <div class="lecture-grid">
+    <a class="card" href="../CHEE6335_L01_Master.html">
+      <div class="num">Lecture 01</div>
+      <h2>Course Orientation & Principles of Probability</h2>
+      <p>Probability foundations, event relationships, and multiplicity introduction.</p>
+    </a>
+
+    <a class="card" href="../CHEE6335_L02_Master.html">
+      <div class="num">Lecture 02</div>
+      <h2>Probability, Combinatorics & Distributions</h2>
+      <p>Conditional probability, correlation, multiplicity, binomial and continuous distributions.</p>
+    </a>
+
+    <a class="card" href="../CHEE6335_L03_Master.html">
+      <div class="num">Lecture 03</div>
+      <h2>Extremum Principles & Maximum Multiplicity</h2>
+      <p>Mechanical equilibrium, multiplicity, pressure, mixing, rubber elasticity, and states.</p>
+    </a>
+
+    <a class="card" href="../CHEE6335_L04_Master.html">
+      <div class="num">Lecture 04</div>
+      <h2>Heat, Work, Energy & Entropy</h2>
+      <p>First Law, energy transfer, multiplicity, entropy, and thermodynamic direction.</p>
+    </a>
+
+    <a class="card" href="../CHEE6335_L05_Master.html">
+      <div class="num">Lecture 05</div>
+      <h2>Entropy, Partition Function & Boltzmann Distribution</h2>
+      <p>Maximum entropy, Lagrange multipliers, partition function, and Boltzmann distribution.</p>
+    </a>
+  </div>
+
+  <div class="resources">
+    Future sections can include Formula Sheets, Homework Review, Midterm Review, Final Review, and Practice Problems.
+  </div>
+</main>
+
+<footer>Taha's Engineering Study Notes</footer>
+</body>
+</html>
