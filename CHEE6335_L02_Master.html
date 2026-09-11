@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>CHEE 6335 - L02 - Probability, Combinatorics &amp; Distributions</title>
+<style>
+  :root{
+    --ink:#172033;
+    --muted:#5d6677;
+    --line:#d8dee9;
+    --soft:#f5f7fb;
+    --soft2:#eef2f8;
+    --important:#fff7df;
+    --exam:#eef6ff;
+    --remember:#eef9f1;
+    --mistake:#fff0f0;
+    --correction:#f5efff;
+    --accent:#1f4e79;
+    --accent2:#6b3fa0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:#edf1f6;
+    font-family:"DejaVu Sans","Liberation Sans",Arial,sans-serif;
+    font-size:16px;
+    line-height:1.62;
+  }
+  main{
+    max-width:980px;
+    margin:28px auto;
+    background:white;
+    box-shadow:0 8px 30px rgba(20,35,60,.09);
+  }
+  .sheet{padding:44px 54px}
+  .cover{
+    min-height:720px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:64px;
+    background:linear-gradient(135deg,#f8fafc 0%,#eef3f8 58%,#f7f4fb 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .kicker{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-size:2.7rem;line-height:1.12;margin:.35rem 0 .8rem;letter-spacing:-.02em}
+  .subtitle{font-size:1.25rem;color:var(--muted);max-width:720px}
+  .meta{margin-top:2.2rem;color:var(--muted);font-size:.96rem}
+  h2{
+    font-size:1.75rem;
+    margin:2.4rem 0 1rem;
+    padding-bottom:.45rem;
+    border-bottom:2px solid var(--soft2);
+    color:#183a5b;
+  }
+  h3{font-size:1.18rem;margin:1.7rem 0 .6rem;color:#273b58}
+  h4{font-size:1rem;margin:1.35rem 0 .45rem;color:#394b65}
+  p{margin:.55rem 0}
+  .en{direction:ltr;text-align:left;unicode-bidi:isolate}
+  .fa{
+    direction:rtl;
+    text-align:right;
+    unicode-bidi:isolate;
+    font-family:"Noto Sans Arabic","Noto Sans Arabic UI","DejaVu Sans",sans-serif;
+    line-height:1.95;
+    margin:1rem 0 1.2rem;
+    padding:1rem 1.1rem;
+    background:#fafbfc;
+    border-right:4px solid #c7d2e0;
+  }
+  .fa strong{font-weight:700}
+  a{color:#174d7a;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .toc{columns:2;column-gap:38px;padding-left:1.2rem}
+  .toc li{break-inside:avoid;margin:.35rem 0}
+  .toc a{display:inline-block}
+  .toplink{font-size:.82rem;color:var(--muted);float:right;font-weight:400}
+  .big-picture{
+    background:var(--soft);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.1rem 1.25rem;
+    margin:1rem 0 1.2rem;
+  }
+  .flow{
+    display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;
+    font-weight:650;color:#25415f;margin-top:.7rem
+  }
+  .flow span{background:white;border:1px solid #d5deea;border-radius:999px;padding:.35rem .65rem}
+  .arrow{color:#8897aa}
+  .formula{
+    direction:ltr;
+    unicode-bidi:isolate;
+    text-align:center;
+    margin:1rem auto;
+    padding:.78rem 1rem;
+    max-width:760px;
+    border-radius:10px;
+    background:#fbfcfe;
+    border:1px solid #dce3ec;
+    font-family:"STIXGeneral","DejaVu Math TeX Gyre","Times New Roman",serif;
+    font-size:1.12rem;
+    overflow-x:auto;
+  }
+  math{font-family:"STIXGeneral","DejaVu Math TeX Gyre",serif;font-size:1.16em}
+  .inline-math{font-family:"STIXGeneral","DejaVu Math TeX Gyre",serif;white-space:nowrap}
+  .callout{
+    border-radius:10px;
+    padding:1rem 1.05rem;
+    margin:1.1rem 0;
+    border:1px solid var(--line);
+  }
+  .callout .label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:.4rem}
+  .important{background:var(--important);border-left:5px solid #d49a14}
+  .exam{background:var(--exam);border-left:5px solid #3c7fc1}
+  .remember{background:var(--remember);border-left:5px solid #4b9860}
+  .mistake{background:var(--mistake);border-left:5px solid #c95a5a}
+  .correction{background:var(--correction);border-left:5px solid #8353b6}
+  .correction .label{color:#70419c}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.3rem;font-size:.95rem}
+  th,td{padding:.62rem .7rem;border:1px solid #d9e0e9;vertical-align:top}
+  th{background:#f1f4f8;text-align:left;color:#2c415e}
+  .num{text-align:center;white-space:nowrap}
+  .notation td:first-child{width:24%;font-family:"STIXGeneral","DejaVu Math TeX Gyre",serif;font-size:1.05rem}
+  .compact li{margin:.25rem 0}
+  ul,ol{padding-left:1.4rem}
+  .example{
+    border:1px solid #d8e0ea;
+    border-radius:12px;
+    margin:1.1rem 0 1.35rem;
+    overflow:hidden;
+  }
+  .example .head{background:#f3f6fa;padding:.7rem 1rem;font-weight:750;color:#274564}
+  .example .body{padding:.9rem 1rem 1rem}
+  .sequence-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin:.9rem 0}
+  .sequence-grid div{text-align:center;border:1px solid #dce3eb;background:#fbfcfd;border-radius:8px;padding:.55rem;font-weight:700;letter-spacing:.05em}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .mini-card{border:1px solid #dbe2ec;border-radius:10px;padding:.9rem;background:#fcfdff}
+  .note{color:var(--muted);font-size:.92rem}
+  .source-note{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem;margin-top:2rem}
+  .eq-list .formula{margin:.6rem 0;text-align:left;max-width:none}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .check{border:1px solid #dce3eb;border-radius:10px;padding:.8rem .9rem;background:#fff}
+  .check:before{content:"☐";margin-right:.5rem;color:#6c7a8d}
+  .svg-wrap{margin:1rem auto;max-width:640px;border:1px solid #dce3eb;border-radius:12px;padding:.7rem;background:white}
+  .smallcaps{font-variant:small-caps;letter-spacing:.03em}
+  .no-break{break-inside:avoid}
+  .page-break{break-before:page;page-break-before:always}
+  .page-break-after{break-after:page;page-break-after:always}
+  .spacer{height:.35rem}
+  @media(max-width:720px){
+    body{font-size:15px;background:white}
+    main{margin:0;box-shadow:none}
+    .sheet{padding:26px 18px}
+    .cover{min-height:100vh;padding:42px 22px}
+    h1{font-size:2.15rem}
+    h2{font-size:1.48rem}
+    .toc{columns:1}
+    .two-col,.exam-grid{grid-template-columns:1fr}
+    .sequence-grid{grid-template-columns:repeat(2,1fr)}
+    table{font-size:.88rem;display:block;overflow-x:auto}
+    .formula{font-size:1.02rem}
+  }
+  @media print{
+    @page{size:Letter;margin:.62in .62in .68in .62in}
+    body{background:white;font-size:10.7pt;line-height:1.48;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    main{max-width:none;margin:0;box-shadow:none}
+    .sheet{padding:0}
+    .cover{min-height:9.1in;padding:.55in;border:0}
+    h1{font-size:27pt}
+    h2{font-size:17pt;margin-top:1.65rem}
+    h3{font-size:12.5pt}
+    .fa{line-height:1.75;padding:.72rem .85rem;margin:.7rem 0 .9rem}
+    .formula{padding:.5rem .75rem;margin:.65rem auto;font-size:10.8pt}
+    .callout{padding:.68rem .8rem;margin:.72rem 0}
+    .example{margin:.75rem 0 1rem}
+    .example .head{padding:.5rem .75rem}
+    .example .body{padding:.65rem .8rem}
+    table{font-size:9.6pt}
+    th,td{padding:.42rem .5rem}
+    a{color:inherit;text-decoration:none}
+    .toplink{display:none}
+    .toc{columns:2}
+    .no-break,.callout,.formula,.example,.mini-card,.svg-wrap{break-inside:avoid;page-break-inside:avoid}
+    .page-break{break-before:page;page-break-before:always}
+  }
+
+
+  .math-html{display:inline-flex;align-items:center;justify-content:center;gap:.12em;white-space:nowrap;font-family:"STIXGeneral","DejaVu Math TeX Gyre","Times New Roman",serif;font-size:1.08em;line-height:1.25;vertical-align:middle}
+  .math-html .mrow{display:inline-flex;align-items:center;gap:.08em;white-space:nowrap}
+  .math-html .frac{display:inline-flex;flex-direction:column;align-items:stretch;justify-content:center;vertical-align:middle;margin:0 .13em;line-height:1.03;min-width:1.05em}
+  .math-html .frac>.num{display:block;text-align:center;padding:0 .12em .08em;border-bottom:1.25px solid currentColor}
+  .math-html .frac>.den{display:block;text-align:center;padding:.08em .12em 0}
+  .math-html sup,.math-html sub{font-size:.70em;line-height:1}
+  .math-html .script{display:inline-flex;align-items:flex-start;white-space:nowrap}
+  .math-html .script sup{position:relative;top:-.18em;margin-left:.03em}
+  .math-html .script sub{position:relative;top:.48em;margin-left:.03em}
+  .math-html .oplimits{display:inline-flex;align-items:center;vertical-align:middle;margin:0 .08em}
+  .math-html .oplimits>.op{font-size:1.45em;line-height:1}
+  .math-html .oplimits>.lims{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;font-size:.60em;line-height:.95;margin-left:.02em}
+  .math-html .oplimits>.lims>.sup{order:0}
+  .math-html .oplimits>.lims>.sub{order:1}
+  .math-html .space{display:inline-block;width:1em}
+</style>
+</head>
+<body id="top">
+<main>
+<section class="cover en">
+<div class="kicker">CHEE 6335 · Master Lecture Notes</div>
+<h1>Lecture 02</h1>
+<div class="subtitle">Probability, Correlation, Combinatorics, Binomial Distribution, and Probability Distributions</div>
+<div class="meta">
+<div><strong>Primary basis:</strong> L02 lecture transcript</div>
+<div><strong>Cross-check:</strong> <em>Molecular Driving Forces</em>, 2nd ed., Chapter 1</div>
+<div><strong>Format:</strong> English technical notes + separate Persian explanations</div>
+</div>
+</section>
+<section class="sheet en page-break" id="toc">
+<h2>Table of Contents</h2>
+<ol class="toc">
+<li><a href="#notation">Notation &amp; Symbols</a></li>
+<li><a href="#scope">Lecture Scope &amp; Big Picture</a></li>
+<li><a href="#conditional">Conditional Probability &amp; Correlation</a></li>
+<li><a href="#combinatorics">Combinatorics: Sequence vs Composition</a></li>
+<li><a href="#factorial">Factorial &amp; Permutations</a></li>
+<li><a href="#indistinguishable">Indistinguishable Objects &amp; Multiplicity</a></li>
+<li><a href="#two-category">Two-Category Multiplicity &amp; Poker</a></li>
+<li><a href="#binomial">Binomial Distribution</a></li>
+<li><a href="#sickle">Lecture Example: Sickle-Cell Hemoglobin</a></li>
+<li><a href="#discrete">Discrete Probability Distributions &amp; Average</a></li>
+<li><a href="#continuous">Continuous Distributions &amp; Normalization</a></li>
+<li><a href="#four-tosses">Four Coin Tosses</a></li>
+<li><a href="#large-n">Large-N Behavior &amp; Bridge to Entropy</a></li>
+<li><a href="#professor">Professor Emphasis &amp; Common Mistakes</a></li>
+<li><a href="#key-equations">Key Equations</a></li>
+<li><a href="#exam">What I Need to Know for the Exam</a></li>
+<li><a href="#self-test">Rapid Self-Test</a></li>
+</ol>
+</section>
+<section class="sheet en page-break" id="notation">
+<h2>Notation &amp; Symbols <a class="toplink" href="#toc">Back to TOC</a></h2>
+<p>Only symbols used in this lecture are listed here. The notation below is used consistently throughout these notes.</p>
+<table class="notation">
+<thead><tr><th>Notation</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>A, B</td><td>Events or outcomes.</td></tr>
+<tr><td>P(A)</td><td>Probability of event A.</td></tr>
+<tr><td>P(B|A)</td><td>Probability of B given that A occurred.</td></tr>
+<tr><td>P(AB)</td><td>Joint probability that A and B both occur.</td></tr>
+<tr><td>A' or not A</td><td>Event A does not occur. This is the preferred notation in these notes.</td></tr>
+<tr><td>P(A or B)</td><td>Probability that A or B occurs.</td></tr>
+<tr><td>A ∩ B</td><td>Alternative notation for “A and B.” Included only for recognition.</td></tr>
+<tr><td>A ∪ B</td><td>Alternative notation for “A or B.” Included only for recognition.</td></tr>
+<tr><td>g</td><td>Degree of correlation.</td></tr>
+<tr><td>N</td><td>Total number of trials or objects.</td></tr>
+<tr><td>n</td><td>Number of occurrences of one selected outcome.</td></tr>
+<tr><td>n<sub>j</sub></td><td>Number of objects or outcomes in category j.</td></tr>
+<tr><td>t</td><td>Number of categories.</td></tr>
+<tr><td>W</td><td>Multiplicity: number of distinguishable arrangements.</td></tr>
+<tr><td>N!</td><td>N factorial.</td></tr>
+<tr><td>C(N,n)</td><td>“N choose n,” the two-category multiplicity.</td></tr>
+<tr><td>p</td><td>Probability of the selected outcome in a two-outcome trial.</td></tr>
+<tr><td>P(n,N)</td><td>Binomial probability of exactly n selected outcomes in N trials.</td></tr>
+<tr><td>H, T</td><td>Heads and tails.</td></tr>
+<tr><td>i</td><td>Index for a discrete outcome.</td></tr>
+<tr><td>p(i)</td><td>Probability of discrete outcome i.</td></tr>
+<tr><td>x</td><td>Continuous variable.</td></tr>
+<tr><td>dx</td><td>Infinitesimal interval in x.</td></tr>
+<tr><td>p(x)</td><td>Normalized probability density.</td></tr>
+<tr><td>g(x)</td><td>Non-normalized distribution or statistical-weight function.</td></tr>
+<tr><td>g<sub>0</sub></td><td>Normalization integral for g(x).</td></tr>
+<tr><td>⟨x⟩</td><td>Average or expected value of x.</td></tr>
+<tr><td>a</td><td>Positive constant in the exponential example.</td></tr>
+<tr><td>α, β<sup>S</sup>, γ</td><td>Hemoglobin chain labels used in the lecture example.</td></tr>
+</tbody>
+</table>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The speech-to-text transcript renders several symbols inconsistently. These notes use the textbook-consistent forms <strong>P(B|A)</strong>, <strong>P(AB)</strong>, <strong>g(x)</strong>, and <strong>g<sub>0</sub></strong>.</p>
+</div>
+<div class="fa" lang="fa">
+      این بخش فقط برای یک‌دست شدن علامت‌هاست. در ادامه‌ی جزوه، یک مفهوم با چند علامت مختلف نوشته نمی‌شود تا هنگام حل مسئله سردرگمی ایجاد نشود.
+    </div>
+</section>
+<section class="sheet en" id="scope">
+<h2>1. Lecture Scope &amp; Big Picture <a class="toplink" href="#toc">Back to TOC</a></h2>
+<div class="big-picture">
+<strong>Core path of the lecture</strong>
+<div class="flow">
+<span>Conditional Probability</span><span class="arrow">→</span>
+<span>Correlation</span><span class="arrow">→</span>
+<span>Combinatorics</span><span class="arrow">→</span>
+<span>Multiplicity</span><span class="arrow">→</span>
+<span>Binomial Distribution</span><span class="arrow">→</span>
+<span>Probability Distributions</span><span class="arrow">→</span>
+<span>Entropy Preview</span>
+</div>
+</div>
+<p>The lecture begins by finishing the probability discussion from the previous class. It then develops counting methods for composite events, introduces multiplicity, derives the binomial distribution, and moves into discrete and continuous probability distributions.</p>
+<div class="fa" lang="fa">
+      مسیر اصلی جلسه این است که ابتدا رابطه‌ی بین رویدادها را بفهمیم، سپس تعداد حالت‌های ممکن را بشماریم، و بعد احتمال یک ترکیب مشخص را پیدا کنیم. این مسیر مقدمه‌ای برای فهم رفتار آماری سیستم‌های مولکولی است.
+    </div>
+<div class="callout remember">
+<div class="label">Remember</div>
+<p>The lecture is not mainly about coins, words, cards, or hemoglobin. Those are models used to learn how probability and counting work before applying the same logic to statistical thermodynamics.</p>
+</div>
+</section>
+<section class="sheet en" id="conditional">
+<h2>2. Conditional Probability &amp; Degree of Correlation <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>2.1 Conditional Probability</h3>
+<p>The conditional probability <span class="inline-math">P(B|A)</span> is the probability that B occurs when A is already known to have occurred.</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>AB</span><span>)</span><span>=</span><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span><span>P</span><span>(</span><span>A</span><span>)</span></span>
+</div>
+<p>This is the general multiplication rule for two events.</p>
+<div class="fa" lang="fa">
+      احتمال شرطی یعنی وقتی از قبل می‌دانیم یک رویداد رخ داده است، احتمال رویداد دوم را در همان شرایط بررسی کنیم.
+    </div>
+<h3>2.2 Independent Events</h3>
+<p>If A does not affect B, the events are independent:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span><span>=</span><span>P</span><span>(</span><span>B</span><span>)</span></span>
+</div>
+<p>Therefore the joint probability becomes:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>AB</span><span>)</span><span>=</span><span>P</span><span>(</span><span>A</span><span>)</span><span>P</span><span>(</span><span>B</span><span>)</span></span>
+</div>
+<h3>2.3 Degree of Correlation</h3>
+<p>The degree of correlation measures how strongly knowing A changes the probability of B.</p>
+<div class="formula">
+<span class="math-html"><span>g</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span></span></span><span class="den"><span class="mrow"><span>P</span><span>(</span><span>B</span><span>)</span></span></span></span></span>
+</div>
+<p>Using the general multiplication rule:</p>
+<div class="formula">
+<span class="math-html"><span>g</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>P</span><span>(</span><span>AB</span><span>)</span></span></span><span class="den"><span class="mrow"><span>P</span><span>(</span><span>A</span><span>)</span><span>P</span><span>(</span><span>B</span><span>)</span></span></span></span></span>
+</div>
+<table>
+<thead><tr><th>Value</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td class="num">g = 1</td><td>Independent / uncorrelated.</td></tr>
+<tr><td class="num">g &gt; 1</td><td>Positively correlated: A increases the probability of B.</td></tr>
+<tr><td class="num">g &lt; 1</td><td>Negatively correlated: A decreases the probability of B.</td></tr>
+<tr><td class="num">g = 0</td><td>If A occurs, B does not occur.</td></tr>
+</tbody>
+</table>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The transcript garbles the denominator of the correlation expression. The correct relation used in the textbook and intended in the lecture is <strong>g = P(B|A) / P(B)</strong>, not division by P(A).</p>
+</div>
+<div class="example no-break">
+<div class="head">Professor Example - Clouds and Rain</div>
+<div class="body">
+<p>Assume:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>rain</span><span>|</span><span>clouds</span><span>)</span><span>=</span><span>0.5</span></span>
+</div>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>rain</span><span>)</span><span>=</span><span>0.1</span></span>
+</div>
+<div class="formula">
+<span class="math-html"><span>g</span><span>=</span><span class="frac"><span class="num"><span>0.5</span></span><span class="den"><span>0.1</span></span></span><span>=</span><span>5</span></span>
+</div>
+<p>Clouds are strongly positively correlated with rain in this example.</p>
+</div>
+</div>
+<div class="fa" lang="fa">
+      در مثال استاد، احتمال عادی باران کم است، اما وقتی وجود ابر را می‌دانیم این احتمال چند برابر می‌شود. بنابراین بین این دو رویداد همبستگی مثبت وجود دارد.
+    </div>
+<div class="callout important">
+<div class="label">Important</div>
+<p>Correlation does not prove causation. The professor emphasized that correlation is a starting point for investigating a causal relationship, not proof of one.</p>
+</div>
+</section>
+<section class="sheet en page-break" id="combinatorics">
+<h2>3. Combinatorics: Sequence vs Composition <a class="toplink" href="#toc">Back to TOC</a></h2>
+<p>Combinatorics provides methods for counting the outcomes of composite events. In this course, the key distinction is between an exact <strong>sequence</strong> and a <strong>composition</strong>.</p>
+<h3>3.1 Exact Sequence</h3>
+<p>For four fair coin tosses, consider the exact sequence:</p>
+<div class="formula"><strong>HHTH</strong></div>
+<p>Because each toss is independent and has probability one-half:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>HHTH</span><span>)</span><span>=</span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>4</span></sup></span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>16</span></span></span></span>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The transcript drops one factor of one-half in this example. Four tosses require four probability factors, so the exact sequence probability is <strong>1/16</strong>.</p>
+</div>
+<h3>3.2 Composition</h3>
+<p>Now ignore the exact order and ask for the composition “three heads and one tail.” Four exact sequences have this composition:</p>
+<div class="sequence-grid">
+<div>THHH</div><div>HTHH</div><div>HHTH</div><div>HHHT</div>
+</div>
+<p>Therefore the probability of this composition is:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>3</span><span>H</span><span>,</span><span>1</span><span>T</span><span>)</span><span>=</span><span>4</span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>4</span></sup></span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>4</span></span></span></span>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The lecture transcript sometimes calls these “four compositions.” Using the textbook terminology precisely, there is <strong>one composition</strong> (3H, 1T) and <strong>four sequences</strong> that realize it.</p>
+</div>
+<div class="fa" lang="fa">
+      تفاوت اصلی این است که در دنباله، ترتیب دقیق اهمیت دارد. در ترکیب فقط تعداد هر نوع نتیجه مهم است و ترتیب نادیده گرفته می‌شود.
+    </div>
+<div class="callout exam">
+<div class="label">Exam</div>
+<p>Before using any counting formula, decide whether the problem asks for one exact sequence or for all sequences having a specified composition.</p>
+</div>
+</section>
+<section class="sheet en" id="factorial">
+<h2>4. Factorial &amp; Permutations <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>4.1 Four Distinguishable Letters</h3>
+<p>For four different letters W, X, Y, and Z used once each:</p>
+<div class="formula">
+<span class="math-html"><span>4</span><span>×</span><span>3</span><span>×</span><span>2</span><span>×</span><span>1</span><span>=</span><span>24</span></span>
+</div>
+<p>The compact notation is:</p>
+<div class="formula"><span class="math-html"><span>4</span><span>!</span><span>=</span><span>24</span></span></div>
+<h3>4.2 General Definition</h3>
+<div class="formula">
+<span class="math-html"><span>N</span><span>!</span><span>=</span><span>N</span><span>(</span><span>N</span><span>−</span><span>1</span><span>)</span><span>(</span><span>N</span><span>−</span><span>2</span><span>)</span><span>⋯</span><span>3</span><span>·</span><span>2</span><span>·</span><span>1</span></span>
+</div>
+<div class="formula"><span class="math-html"><span>0</span><span>!</span><span>=</span><span>1</span></span></div>
+<div class="fa" lang="fa">
+      فاکتوریل تعداد ترتیب‌های ممکن برای مجموعه‌ای از اشیای قابل تشخیص را به‌صورت فشرده نشان می‌دهد. مقدار فاکتوریل صفر طبق تعریف برابر یک است و در محاسبات این درس بارها ظاهر می‌شود.
+    </div>
+<h3>4.3 Twenty-Six Different Letters</h3>
+<p>If all 26 letters are used exactly once, the number of sequences is:</p>
+<div class="formula"><span class="math-html"><span>26</span><span>!</span><span>≈</span><span>4.03</span><span>×</span><span class="script"><span>10</span><sup><span>26</span></sup></span></span></div>
+<p>If repetition is allowed independently at every one of the 26 positions, the number of sequences is:</p>
+<div class="formula"><span class="math-html"><span class="script"><span>26</span><sup><span>26</span></sup></span></span></div>
+<div class="callout remember">
+<div class="label">Remember</div>
+<p>More constraints mean fewer possible outcomes. “Use every letter once” is a constraint, so 26! must be smaller than 26<sup>26</sup>.</p>
+</div>
+</section>
+<section class="sheet en page-break" id="indistinguishable">
+<h2>5. Indistinguishable Objects &amp; Multiplicity <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>5.1 Example: A, A, H</h3>
+<p>If the two A's were distinguishable, they could be labeled A<sub>1</sub> and A<sub>2</sub>, giving 3! arrangements. But when the A's are indistinguishable, swapping them does not create a new distinguishable sequence.</p>
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>3</span><span>!</span></span></span><span class="den"><span class="mrow"><span>2</span><span>!</span></span></span></span><span>=</span><span>3</span></span>
+</div>
+<p>The three distinguishable sequences are:</p>
+<div class="sequence-grid" style="grid-template-columns:repeat(3,1fr)"><div>HAA</div><div>AHA</div><div>AAH</div></div>
+<div class="fa" lang="fa">
+      وقتی دو شیء یکسان هستند، جابه‌جا کردن آن‌ها حالت جدید قابل تشخیصی نمی‌سازد. بنابراین شمارش فاکتوریلی اولیه بیش‌شماری می‌کند و باید آن را اصلاح کنیم.
+    </div>
+<h3>5.2 Example: CHEESE</h3>
+<p>CHEESE has six letters, with three indistinguishable E's:</p>
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>6</span><span>!</span></span></span><span class="den"><span class="mrow"><span>3</span><span>!</span></span></span></span><span>=</span><span>120</span></span>
+</div>
+<h3>5.3 Example: FREEZER</h3>
+<p>FREEZER has seven letters, with three E's and two R's:</p>
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>7</span><span>!</span></span></span><span class="den"><span class="mrow"><span>3</span><span>!</span><span>2</span><span>!</span></span></span></span><span>=</span><span>420</span></span>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The transcript is garbled in this example and briefly sounds like two factors of 3!. The textbook example corresponding to the professor's calculation is FREEZER, so the correct denominator is <strong>3! × 2!</strong>, giving <strong>420</strong>.</p>
+</div>
+<h3>5.4 General Multiplicity Formula</h3>
+<p>For N total objects distributed among t categories, where category j contains n<sub>j</sub> indistinguishable objects:</p>
+<div class="formula">
+<span class="math-html"><span class="oplimits"><span class="op"><span>∑</span></span><span class="lims"><span class="sup"><span>t</span></span><span class="sub"><span class="mrow"><span>j</span><span>=</span><span>1</span></span></span></span></span><span class="script"><span>n</span><sub><span>j</span></sub></span><span>=</span><span>N</span></span>
+</div>
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span class="script"><span>n</span><sub><span>1</span></sub></span><span>!</span><span class="script"><span>n</span><sub><span>2</span></sub></span><span>!</span><span>⋯</span><span class="script"><span>n</span><sub><span>t</span></sub></span><span>!</span></span></span></span></span>
+</div>
+<div class="callout important">
+<div class="label">Important</div>
+<p>The professor emphasized that the hardest part of combinatorics is often not the arithmetic. It is defining the outcomes and categories correctly.</p>
+</div>
+</section>
+<section class="sheet en" id="two-category">
+<h2>6. Two-Category Multiplicity &amp; Poker <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>6.1 Two Categories</h3>
+<p>If there are only two categories, n objects are in the selected category and N − n are in the other category:</p>
+<div class="formula">
+<span class="math-html"><span>W</span><span>(</span><span>n</span><span>,</span><span>N</span><span>)</span><span>=</span><span>C</span><span>(</span><span>N</span><span>,</span><span>n</span><span>)</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span>n</span><span>!</span><span>(</span><span>N</span><span>−</span><span>n</span><span>)</span><span>!</span></span></span></span></span>
+</div>
+<p>This is read as “N choose n.”</p>
+<div class="example">
+<div class="head">Example - Three Heads and One Tail</div>
+<div class="body">
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>4</span><span>!</span></span></span><span class="den"><span class="mrow"><span>3</span><span>!</span><span>1</span><span>!</span></span></span></span><span>=</span><span>4</span></span>
+</div>
+</div>
+</div>
+<h3>6.2 Poker Hand Counting</h3>
+<p>A standard deck contains 52 cards. A classical poker hand contains 5 cards. The order in which the five cards are drawn does not matter, so the number of distinguishable hands is:</p>
+<div class="formula">
+<span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>52</span><span>!</span></span></span><span class="den"><span class="mrow"><span>5</span><span>!</span><span>47</span><span>!</span></span></span></span><span>=</span><span>2,598,960</span></span>
+</div>
+<p>There are four royal flushes, one for each suit. Therefore:</p>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>royal flush</span><span>)</span><span>=</span><span class="frac"><span class="num"><span>4</span></span><span class="den"><span>2,598,960</span></span></span><span>≈</span><span>1.54</span><span>×</span><span class="script"><span>10</span><sup><span class="mrow"><span>−</span><span>6</span></span></sup></span></span>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The professor rounded the number of poker hands to “about two million,” leading to the rough statement “about one in 500,000.” The exact count is 2,598,960 hands, so the royal-flush probability is approximately 1.54 × 10<sup>−6</sup>.</p>
+</div>
+<div class="fa" lang="fa">
+      در مسائل انتخاب بدون توجه به ترتیب، ابتدا باید تشخیص دهیم که جابه‌جایی اعضای انتخاب‌شده نتیجه‌ی جدیدی ایجاد نمی‌کند. به همین دلیل در مثال دست پوکر، ترتیب پنج کارت در شمارش نهایی حذف می‌شود.
+    </div>
+</section>
+<section class="sheet en page-break" id="binomial">
+<h2>7. Binomial Distribution <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>7.1 Two Outcomes</h3>
+<p>Assume each independent trial has two mutually exclusive outcomes. Let the selected outcome have probability p. The other outcome has probability 1 − p.</p>
+<h3>7.2 Two Trials: Build the Distribution</h3>
+<table>
+<thead><tr><th>Sequence</th><th>Probability</th></tr></thead>
+<tbody>
+<tr><td>AA</td><td>p<sup>2</sup></td></tr>
+<tr><td>AB</td><td>p(1 − p)</td></tr>
+<tr><td>BA</td><td>(1 − p)p</td></tr>
+<tr><td>BB</td><td>(1 − p)<sup>2</sup></td></tr>
+</tbody>
+</table>
+<p>Because these four possibilities are mutually exclusive and collectively exhaustive, their probabilities must add to one:</p>
+<div class="formula">
+<span class="math-html"><span class="script"><span>p</span><sup><span>2</span></sup></span><span>+</span><span>2</span><span>p</span><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span><span>+</span><span class="script"><span class="mrow"><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span></span><sup><span>2</span></sup></span><span>=</span><span class="script"><span class="mrow"><span>[</span><span>p</span><span>+</span><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span><span>]</span></span><sup><span>2</span></sup></span><span>=</span><span>1</span></span>
+</div>
+<div class="callout important">
+<div class="label">Important</div>
+<p>The professor repeatedly emphasized: do not merely say “the probabilities must add to one.” Calculate and check that they actually do.</p>
+</div>
+<h3>7.3 General Derivation</h3>
+<p>We now ask: what is the probability of exactly n selected outcomes in N independent trials?</p>
+<h4>Step 1 - Probability of one particular sequence</h4>
+<div class="formula">
+<span class="math-html"><span class="script"><span>p</span><sup><span>n</span></sup></span><span class="script"><span class="mrow"><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span></span><sup><span class="mrow"><span>N</span><span>−</span><span>n</span></span></sup></span></span>
+</div>
+<h4>Step 2 - Number of sequences with that composition</h4>
+<div class="formula">
+<span class="math-html"><span>W</span><span>(</span><span>n</span><span>,</span><span>N</span><span>)</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span>n</span><span>!</span><span>(</span><span>N</span><span>−</span><span>n</span><span>)</span><span>!</span></span></span></span></span>
+</div>
+<h4>Step 3 - Multiply them</h4>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>n</span><span>,</span><span>N</span><span>)</span><span>=</span><span class="script"><span>p</span><sup><span>n</span></sup></span><span class="script"><span class="mrow"><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span></span><sup><span class="mrow"><span>N</span><span>−</span><span>n</span></span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span>n</span><span>!</span><span>(</span><span>N</span><span>−</span><span>n</span><span>)</span><span>!</span></span></span></span></span>
+</div>
+<div class="callout exam">
+<div class="label">Exam</div>
+<p>Understand the formula as two pieces:</p>
+<ol class="compact">
+<li><strong>p<sup>n</sup>(1 − p)<sup>N−n</sup></strong>: probability of one particular sequence.</li>
+<li><strong>N!/[n!(N−n)!]</strong>: number of sequences having the required composition.</li>
+</ol>
+</div>
+<div class="fa" lang="fa">
+      فرمول دوجمله‌ای را فقط حفظ نکن. ابتدا احتمال یک ترتیب مشخص را حساب می‌کنیم و سپس آن را در تعداد ترتیب‌هایی که همان ترکیب را می‌سازند ضرب می‌کنیم. این منطق، خود فرمول را قابل فهم می‌کند.
+    </div>
+</section>
+<section class="sheet en page-break" id="sickle">
+<h2>8. Lecture Example: Sickle-Cell Hemoglobin <a class="toplink" href="#toc">Back to TOC</a></h2>
+<p>The professor used a hemoglobin example to show how a simple binomial calculation can produce a nonlinear change in the fraction of molecular species.</p>
+<div class="callout important">
+<div class="label">Lecture Model</div>
+<p>This section follows the simplified molecular argument presented in the lecture. It is included as a probability/combinatorics example, not as a complete medical model.</p>
+</div>
+<h3>8.1 Chain Types Used in the Example</h3>
+<table>
+<thead><tr><th>Hemoglobin form</th><th>Chain composition used in lecture</th></tr></thead>
+<tbody>
+<tr><td>Adult hemoglobin</td><td>α<sub>2</sub>β<sub>2</sub></td></tr>
+<tr><td>Sickle hemoglobin</td><td>α<sub>2</sub>(β<sup>S</sup>)<sub>2</sub></td></tr>
+<tr><td>Fetal hemoglobin</td><td>α<sub>2</sub>γ<sub>2</sub></td></tr>
+</tbody>
+</table>
+<p>In the mixture discussed by the professor, each of the two non-α chain positions can be occupied by either β<sup>S</sup> or γ. Therefore this is a two-outcome, two-trial problem:</p>
+<div class="formula"><span class="math-html"><span>N</span><span>=</span><span>2</span></span></div>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span>γ</span><span>)</span><span>=</span><span>0.2</span></span></div>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span class="script"><span>β</span><sup><span>S</span></sup></span><span>)</span><span>=</span><span>0.8</span></span></div>
+<h3>8.2 Case 1 - Two β<sup>S</sup> Chains</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>0</span><span> gamma chains</span><span>)</span><span>=</span><span class="script"><span>0.2</span><sup><span>0</span></sup></span><span class="script"><span>0.8</span><sup><span>2</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>2</span><span>!</span></span></span><span class="den"><span class="mrow"><span>0</span><span>!</span><span>2</span><span>!</span></span></span></span><span>=</span><span>0.64</span></span>
+</div>
+<h3>8.3 Case 2 - One β<sup>S</sup> and One γ Chain</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>1</span><span> gamma chain</span><span>)</span><span>=</span><span class="script"><span>0.2</span><sup><span>1</span></sup></span><span class="script"><span>0.8</span><sup><span>1</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>2</span><span>!</span></span></span><span class="den"><span class="mrow"><span>1</span><span>!</span><span>1</span><span>!</span></span></span></span><span>=</span><span>0.32</span></span>
+</div>
+<h3>8.4 Case 3 - Two γ Chains</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>2</span><span> gamma chains</span><span>)</span><span>=</span><span class="script"><span>0.2</span><sup><span>2</span></sup></span><span class="script"><span>0.8</span><sup><span>0</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>2</span><span>!</span></span></span><span class="den"><span class="mrow"><span>2</span><span>!</span><span>0</span><span>!</span></span></span></span><span>=</span><span>0.04</span></span>
+</div>
+<h3>8.5 Probability Check</h3>
+<div class="formula"><span class="math-html"><span>0.64</span><span>+</span><span>0.32</span><span>+</span><span>0.04</span><span>=</span><span>1</span></span></div>
+<p>In the simplified lecture argument, only the species with two β<sup>S</sup> chains was identified as the fiber-forming species. Its fraction is 0.64, so the professor highlighted a 36% reduction relative to a hypothetical all-β<sup>S</sup> population.</p>
+<div class="formula"><span class="math-html"><span>1</span><span>−</span><span>0.64</span><span>=</span><span>0.36</span></span></div>
+<div class="fa" lang="fa">
+      نکته‌ی احتمالاتی مثال این است که حضور بیست درصد از یک نوع زنجیره، لزوماً فقط بیست درصد اثر روی ترکیب مولکول‌ها نمی‌گذارد. چون دو جایگاه مستقل داریم، توزیع ترکیب‌ها از قانون دوجمله‌ای پیروی می‌کند و نتیجه‌ی نهایی غیرخطی می‌شود.
+    </div>
+</section>
+<section class="sheet en page-break" id="discrete">
+<h2>9. Discrete Probability Distributions &amp; Average <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>9.1 Probability Distribution</h3>
+<p>For a discrete set of mutually exclusive and collectively exhaustive outcomes, the probabilities must satisfy:</p>
+<div class="formula">
+<span class="math-html"><span class="oplimits"><span class="op"><span>∑</span></span><span class="lims"><span class="sup"><span>t</span></span><span class="sub"><span class="mrow"><span>i</span><span>=</span><span>1</span></span></span></span></span><span>p</span><span>(</span><span>i</span><span>)</span><span>=</span><span>1</span></span>
+</div>
+<h3>9.2 Example Distribution from the Lecture</h3>
+<table>
+<thead><tr><th>Outcome i</th><th>p(i)</th><th>i · p(i)</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td class="num">0.1</td><td class="num">0.1</td></tr>
+<tr><td class="num">2</td><td class="num">0.2</td><td class="num">0.4</td></tr>
+<tr><td class="num">3</td><td class="num">0.3</td><td class="num">0.9</td></tr>
+<tr><td class="num">4</td><td class="num">0.2</td><td class="num">0.8</td></tr>
+<tr><td class="num">5</td><td class="num">0.2</td><td class="num">1.0</td></tr>
+</tbody>
+<tfoot><tr><th>Total</th><th class="num">1.0</th><th class="num">3.2</th></tr></tfoot>
+</table>
+<h3>9.3 Average / Expected Value</h3>
+<div class="formula">
+<span class="math-html"><span>⟨</span><span>x</span><span>⟩</span><span>=</span><span class="oplimits"><span class="op"><span>∑</span></span><span class="lims"><span class="sup"><span></span></span><span class="sub"><span>i</span></span></span></span><span class="script"><span>x</span><sub><span>i</span></sub></span><span>p</span><span>(</span><span>i</span><span>)</span></span>
+</div>
+<p>For the lecture example, x<sub>i</sub> = i:</p>
+<div class="formula">
+<span class="math-html"><span>⟨</span><span>x</span><span>⟩</span><span>=</span><span>0.1</span><span>+</span><span>0.4</span><span>+</span><span>0.9</span><span>+</span><span>0.8</span><span>+</span><span>1.0</span><span>=</span><span>3.2</span></span>
+</div>
+<p>The median of this discrete distribution is 3, while the average is 3.2. The distribution is not symmetric.</p>
+<div class="callout correction">
+<div class="label">Transcript Correction</div>
+<p>The transcript contains several conflicting spoken numbers (“3.4,” “2.2,” and “3.2”). Direct calculation from the probabilities written in the lecture gives the correct average: <strong>3.2</strong>.</p>
+</div>
+<div class="fa" lang="fa">
+      میانگین آماری یک میانگین وزن‌دار است. هر مقدار به اندازه‌ی احتمال خودش در نتیجه سهم دارد. در مثال کلاس، محاسبه‌ی مستقیم عدد سه و دو دهم را می‌دهد.
+    </div>
+</section>
+<section class="sheet en" id="continuous">
+<h2>10. Continuous Distributions &amp; Normalization <a class="toplink" href="#toc">Back to TOC</a></h2>
+<h3>10.1 Probability Density</h3>
+<p>When x is continuous, p(x) is a probability density. The probability of finding x in a small interval from x to x + dx is:</p>
+<div class="formula"><span class="math-html"><span>p</span><span>(</span><span>x</span><span>)</span><span>d</span><span>x</span></span></div>
+<p>For the range used in the lecture:</p>
+<div class="formula">
+<span class="math-html"><span class="oplimits"><span class="op"><span>∫</span></span><span class="lims"><span class="sup"><span>∞</span></span><span class="sub"><span>0</span></span></span></span><span>p</span><span>(</span><span>x</span><span>)</span><span>d</span><span>x</span><span>=</span><span>1</span></span>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Clarification</div>
+<p>For a continuous variable, p(x) itself is a density; the probability over an infinitesimal interval is p(x)dx.</p>
+</div>
+<h3>10.2 Non-Normalized Distribution</h3>
+<p>If g(x) is not normalized, first calculate its normalization integral:</p>
+<div class="formula">
+<span class="math-html"><span class="script"><span>g</span><sub><span>0</span></sub></span><span>=</span><span class="oplimits"><span class="op"><span>∫</span></span><span class="lims"><span class="sup"><span>b</span></span><span class="sub"><span>a</span></span></span></span><span>g</span><span>(</span><span>x</span><span>)</span><span>d</span><span>x</span></span>
+</div>
+<p>Then define the normalized probability density:</p>
+<div class="formula">
+<span class="math-html"><span>p</span><span>(</span><span>x</span><span>)</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>g</span><span>(</span><span>x</span><span>)</span></span></span><span class="den"><span class="script"><span>g</span><sub><span>0</span></sub></span></span></span></span>
+</div>
+<h3>10.3 Exponential Example</h3>
+<p>The professor used:</p>
+<div class="formula"><span class="math-html"><span>g</span><span>(</span><span>x</span><span>)</span><span>=</span><span class="script"><span>e</span><sup><span class="mrow"><span>−</span><span>a</span><span>x</span></span></sup></span><span>,</span><span class="space"> </span><span>x</span><span>≥</span><span>0</span></span></div>
+<p>For a &gt; 0:</p>
+<div class="formula">
+<span class="math-html"><span class="script"><span>g</span><sub><span>0</span></sub></span><span>=</span><span class="oplimits"><span class="op"><span>∫</span></span><span class="lims"><span class="sup"><span>∞</span></span><span class="sub"><span>0</span></span></span></span><span class="script"><span>e</span><sup><span class="mrow"><span>−</span><span>a</span><span>x</span></span></sup></span><span>d</span><span>x</span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>a</span></span></span></span>
+</div>
+<p>Therefore:</p>
+<div class="formula">
+<span class="math-html"><span>p</span><span>(</span><span>x</span><span>)</span><span>=</span><span>a</span><span class="script"><span>e</span><sup><span class="mrow"><span>−</span><span>a</span><span>x</span></span></sup></span></span>
+</div>
+<div class="fa" lang="fa">
+      اگر یک تابع هنوز مجموع احتمال یک نداشته باشد، ابتدا اندازه‌ی کل آن را پیدا می‌کنیم و سپس تابع را بر همان مقدار تقسیم می‌کنیم. نتیجه یک چگالی احتمال نرمال‌شده است.
+    </div>
+<div class="callout remember">
+<div class="label">Remember</div>
+<p>The professor used this normalization example to preview why normalization factors will become important later when the partition function is introduced.</p>
+</div>
+<div class="callout correction">
+<div class="label">Transcript Clarification</div>
+<p>The transcript loosely equates the constant a with the later partition function. For this lecture, keep only the intended takeaway: <strong>normalization factors are crucial and will reappear in the partition-function discussion.</strong></p>
+</div>
+</section>
+<section class="sheet en page-break" id="four-tosses">
+<h2>11. Four Coin Tosses: Full Binomial Distribution <a class="toplink" href="#toc">Back to TOC</a></h2>
+<p>For a fair coin:</p>
+<div class="formula"><span class="math-html"><span>p</span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>,</span><span class="space"> </span><span>N</span><span>=</span><span>4</span></span></div>
+<h3>11.1 Zero Heads</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>0</span><span>,</span><span>4</span><span>)</span><span>=</span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>0</span></sup></span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>4</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>4</span><span>!</span></span></span><span class="den"><span class="mrow"><span>0</span><span>!</span><span>4</span><span>!</span></span></span></span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>16</span></span></span></span>
+</div>
+<h3>11.2 One Head</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>1</span><span>,</span><span>4</span><span>)</span><span>=</span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>1</span></sup></span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>3</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>4</span><span>!</span></span></span><span class="den"><span class="mrow"><span>1</span><span>!</span><span>3</span><span>!</span></span></span></span><span>=</span><span class="frac"><span class="num"><span>4</span></span><span class="den"><span>16</span></span></span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>4</span></span></span></span>
+</div>
+<h3>11.3 Two Heads</h3>
+<div class="formula">
+<span class="math-html"><span>P</span><span>(</span><span>2</span><span>,</span><span>4</span><span>)</span><span>=</span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>2</span></sup></span><span class="script"><span class="mrow"><span>(</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>2</span></span></span><span>)</span></span><sup><span>2</span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>4</span><span>!</span></span></span><span class="den"><span class="mrow"><span>2</span><span>!</span><span>2</span><span>!</span></span></span></span><span>=</span><span class="frac"><span class="num"><span>6</span></span><span class="den"><span>16</span></span></span><span>=</span><span class="frac"><span class="num"><span>3</span></span><span class="den"><span>8</span></span></span></span>
+</div>
+<h3>11.4 Symmetry</h3>
+<p>Because the coin is unbiased:</p>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span>3</span><span>,</span><span>4</span><span>)</span><span>=</span><span class="frac"><span class="num"><span>4</span></span><span class="den"><span>16</span></span></span><span>,</span><span class="space"> </span><span>P</span><span>(</span><span>4</span><span>,</span><span>4</span><span>)</span><span>=</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>16</span></span></span></span></div>
+<table>
+<thead><tr><th>Number of heads</th><th>Multiplicity</th><th>Probability</th></tr></thead>
+<tbody>
+<tr><td class="num">0</td><td class="num">1</td><td class="num">1/16</td></tr>
+<tr><td class="num">1</td><td class="num">4</td><td class="num">4/16 = 1/4</td></tr>
+<tr><td class="num">2</td><td class="num">6</td><td class="num">6/16 = 3/8</td></tr>
+<tr><td class="num">3</td><td class="num">4</td><td class="num">4/16 = 1/4</td></tr>
+<tr><td class="num">4</td><td class="num">1</td><td class="num">1/16</td></tr>
+</tbody>
+</table>
+<div aria-label="Bar chart of the four coin toss binomial distribution" class="svg-wrap">
+<svg aria-label="Probability distribution for the number of heads in four fair coin tosses" role="img" viewbox="0 0 640 310" width="100%">
+<rect fill="#ffffff" height="310" width="640" x="0" y="0"></rect>
+<line stroke="#667085" stroke-width="1.5" x1="70" x2="595" y1="250" y2="250"></line>
+<line stroke="#667085" stroke-width="1.5" x1="70" x2="70" y1="35" y2="250"></line>
+<g fill="#dce7f3" stroke="#56789d" stroke-width="1.5">
+<rect height="34" rx="4" width="60" x="100" y="216"></rect>
+<rect height="136" rx="4" width="60" x="200" y="114"></rect>
+<rect height="204" rx="4" width="60" x="300" y="46"></rect>
+<rect height="136" rx="4" width="60" x="400" y="114"></rect>
+<rect height="34" rx="4" width="60" x="500" y="216"></rect>
+</g>
+<g fill="#26384d" font-family="DejaVu Sans, Arial" font-size="15" text-anchor="middle">
+<text x="130" y="275">0</text><text x="230" y="275">1</text><text x="330" y="275">2</text><text x="430" y="275">3</text><text x="530" y="275">4</text>
+<text x="130" y="207">1/16</text><text x="230" y="105">1/4</text><text x="330" y="37">3/8</text><text x="430" y="105">1/4</text><text x="530" y="207">1/16</text>
+<text font-weight="700" x="330" y="302">Number of heads</text>
+</g>
+<text fill="#26384d" font-family="DejaVu Sans, Arial" font-size="15" font-weight="700" text-anchor="middle" transform="rotate(-90 22 150)" x="22" y="150">Probability</text>
+</svg>
+</div>
+<h3>11.5 Normalization Check</h3>
+<div class="formula">
+<span class="math-html"><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>16</span></span></span><span>+</span><span class="frac"><span class="num"><span>4</span></span><span class="den"><span>16</span></span></span><span>+</span><span class="frac"><span class="num"><span>6</span></span><span class="den"><span>16</span></span></span><span>+</span><span class="frac"><span class="num"><span>4</span></span><span class="den"><span>16</span></span></span><span>+</span><span class="frac"><span class="num"><span>1</span></span><span class="den"><span>16</span></span></span><span>=</span><span>1</span></span>
+</div>
+<div class="fa" lang="fa">
+      بیشترین احتمال برای دو شیر و دو خط است، اما حتی این حالت هم احتمال یک ندارد. در چهار پرتاب، هنوز چند ترکیب مختلف سهم قابل توجهی از احتمال کل دارند.
+    </div>
+</section>
+<section class="sheet en" id="large-n">
+<h2>12. Large-N Behavior &amp; Bridge to Entropy <a class="toplink" href="#toc">Back to TOC</a></h2>
+<p>The professor ended the lecture by asking what happens as the number of trials becomes much larger: 10, 100, 1000, and beyond.</p>
+<p>For a fair two-outcome process, the distribution becomes increasingly concentrated around an equal fraction of the two outcomes. The most probable composition occurs near:</p>
+<div class="formula"><span class="math-html"><span>n</span><span>≈</span><span class="frac"><span class="num"><span>N</span></span><span class="den"><span>2</span></span></span></span></div>
+<p>This is the conceptual bridge to statistical thermodynamics: when N is very large, the overwhelming number of microscopic sequences lie near the most probable macroscopic composition.</p>
+<div class="callout correction">
+<div class="label">Transcript Clarification</div>
+<p>The transcript says that for very large N the single equal-heads/equal-tails outcome “becomes the only one that happens.” The textbook's more precise statement is that the <strong>distribution becomes sharply concentrated around the most probable composition</strong>. It is the relative composition that becomes highly predictable; the probability of one exact composition should not be interpreted as literally becoming 1.</p>
+</div>
+<div class="fa" lang="fa">
+      وقتی تعداد آزمایش‌ها بسیار زیاد می‌شود، نسبت نتایج به مقدار محتمل‌تر نزدیک می‌شود و نوسان نسبی کوچک‌تر می‌گردد. این همان ایده‌ای است که بعداً برای توضیح رفتار ماکروسکوپی تعداد بسیار زیادی مولکول استفاده می‌شود.
+    </div>
+<div class="callout remember">
+<div class="label">Remember</div>
+<p>The lecture's destination is the idea of a most probable macrostate arising from multiplicity. Entropy will quantify this idea in the following development of the course.</p>
+</div>
+</section>
+<section class="sheet en page-break" id="professor">
+<h2>13. Professor Emphasis &amp; Common Mistakes <a class="toplink" href="#toc">Back to TOC</a></h2>
+<div class="two-col">
+<div class="mini-card">
+<h3 style="margin-top:0">Professor Emphasis</h3>
+<ul class="compact">
+<li>Read the book and follow the notes; the concepts build on each other.</li>
+<li>Always check calculations instead of assuming the answer “must” be correct.</li>
+<li>Have an estimate or expectation before trusting a calculator result.</li>
+<li>In combinatorics, define the outcomes and categories before choosing a formula.</li>
+<li>Ask exactly what probability question is being asked.</li>
+<li>Correlation is not the same as causation.</li>
+</ul>
+</div>
+<div class="mini-card">
+<h3 style="margin-top:0">Common Mistakes</h3>
+<ul class="compact">
+<li>Confusing one exact sequence with a composition.</li>
+<li>Using N! when some objects are indistinguishable.</li>
+<li>Forgetting the combinatorial factor in a binomial probability.</li>
+<li>Using P(A) instead of P(B) in the denominator of the correlation ratio.</li>
+<li>Forgetting that 0! = 1.</li>
+<li>Treating p(x) as a point probability rather than a probability density.</li>
+<li>Failing to verify that a probability distribution is normalized.</li>
+</ul>
+</div>
+</div>
+<div class="callout mistake">
+<div class="label">Common Mistake</div>
+<p>Do not jump straight to a factorial formula. First answer: What are the trials? What are the categories? Does order matter? Which objects are distinguishable?</p>
+</div>
+<div class="fa" lang="fa">
+      روش حل خوب در این جلسه از تشخیص درست صورت مسئله شروع می‌شود. اگر نوع رویداد و دسته‌بندی‌ها درست تعیین شوند، بخش محاسباتی معمولاً ساده‌تر می‌شود.
+    </div>
+</section>
+<section class="sheet en page-break" id="key-equations">
+<h2>14. Key Equations <a class="toplink" href="#toc">Back to TOC</a></h2>
+<div class="eq-list">
+<h3>Conditional and Joint Probability</h3>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span>AB</span><span>)</span><span>=</span><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span><span>P</span><span>(</span><span>A</span><span>)</span></span></div>
+<h3>Independent Events</h3>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span><span>=</span><span>P</span><span>(</span><span>B</span><span>)</span></span></div>
+<h3>Degree of Correlation</h3>
+<div class="formula"><span class="math-html"><span>g</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>P</span><span>(</span><span>B</span><span>|</span><span>A</span><span>)</span></span></span><span class="den"><span class="mrow"><span>P</span><span>(</span><span>B</span><span>)</span></span></span></span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>P</span><span>(</span><span>AB</span><span>)</span></span></span><span class="den"><span class="mrow"><span>P</span><span>(</span><span>A</span><span>)</span><span>P</span><span>(</span><span>B</span><span>)</span></span></span></span></span></div>
+<h3>Factorial</h3>
+<div class="formula"><span class="math-html"><span>N</span><span>!</span><span>=</span><span>N</span><span>(</span><span>N</span><span>−</span><span>1</span><span>)</span><span>⋯</span><span>2</span><span>·</span><span>1</span><span>,</span><span class="space"> </span><span>0</span><span>!</span><span>=</span><span>1</span></span></div>
+<h3>General Multiplicity</h3>
+<div class="formula"><span class="math-html"><span>W</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span class="script"><span>n</span><sub><span>1</span></sub></span><span>!</span><span class="script"><span>n</span><sub><span>2</span></sub></span><span>!</span><span>⋯</span><span class="script"><span>n</span><sub><span>t</span></sub></span><span>!</span></span></span></span></span></div>
+<h3>Two-Category Multiplicity</h3>
+<div class="formula"><span class="math-html"><span>C</span><span>(</span><span>N</span><span>,</span><span>n</span><span>)</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span>n</span><span>!</span><span>(</span><span>N</span><span>−</span><span>n</span><span>)</span><span>!</span></span></span></span></span></div>
+<h3>Binomial Distribution</h3>
+<div class="formula"><span class="math-html"><span>P</span><span>(</span><span>n</span><span>,</span><span>N</span><span>)</span><span>=</span><span class="script"><span>p</span><sup><span>n</span></sup></span><span class="script"><span class="mrow"><span>(</span><span>1</span><span>−</span><span>p</span><span>)</span></span><sup><span class="mrow"><span>N</span><span>−</span><span>n</span></span></sup></span><span class="frac"><span class="num"><span class="mrow"><span>N</span><span>!</span></span></span><span class="den"><span class="mrow"><span>n</span><span>!</span><span>(</span><span>N</span><span>−</span><span>n</span><span>)</span><span>!</span></span></span></span></span></div>
+<h3>Discrete Normalization</h3>
+<div class="formula"><span class="math-html"><span class="oplimits"><span class="op"><span>∑</span></span><span class="lims"><span class="sup"><span></span></span><span class="sub"><span>i</span></span></span></span><span>p</span><span>(</span><span>i</span><span>)</span><span>=</span><span>1</span></span></div>
+<h3>Discrete Average</h3>
+<div class="formula"><span class="math-html"><span>⟨</span><span>x</span><span>⟩</span><span>=</span><span class="oplimits"><span class="op"><span>∑</span></span><span class="lims"><span class="sup"><span></span></span><span class="sub"><span>i</span></span></span></span><span class="script"><span>x</span><sub><span>i</span></sub></span><span>p</span><span>(</span><span>i</span><span>)</span></span></div>
+<h3>Continuous Normalization</h3>
+<div class="formula"><span class="math-html"><span class="oplimits"><span class="op"><span>∫</span></span><span class="lims"><span class="sup"><span>b</span></span><span class="sub"><span>a</span></span></span></span><span>p</span><span>(</span><span>x</span><span>)</span><span>d</span><span>x</span><span>=</span><span>1</span></span></div>
+<h3>Normalize a Weight Function</h3>
+<div class="formula"><span class="math-html"><span class="script"><span>g</span><sub><span>0</span></sub></span><span>=</span><span class="oplimits"><span class="op"><span>∫</span></span><span class="lims"><span class="sup"><span>b</span></span><span class="sub"><span>a</span></span></span></span><span>g</span><span>(</span><span>x</span><span>)</span><span>d</span><span>x</span><span>,</span><span class="space"> </span><span>p</span><span>(</span><span>x</span><span>)</span><span>=</span><span class="frac"><span class="num"><span class="mrow"><span>g</span><span>(</span><span>x</span><span>)</span></span></span><span class="den"><span class="script"><span>g</span><sub><span>0</span></sub></span></span></span></span></div>
+<h3>Exponential Example</h3>
+<div class="formula"><span class="math-html"><span>g</span><span>(</span><span>x</span><span>)</span><span>=</span><span class="script"><span>e</span><sup><span class="mrow"><span>−</span><span>a</span><span>x</span></span></sup></span><span>⇒</span><span>p</span><span>(</span><span>x</span><span>)</span><span>=</span><span>a</span><span class="script"><span>e</span><sup><span class="mrow"><span>−</span><span>a</span><span>x</span></span></sup></span></span></div>
+</div>
+</section>
+<section class="sheet en page-break" id="exam">
+<h2>15. What I Need to Know for the Exam <a class="toplink" href="#toc">Back to TOC</a></h2>
+<div class="exam-grid">
+<div class="check">Explain what P(B|A) means.</div>
+<div class="check">Recognize when two events are independent.</div>
+<div class="check">Calculate and interpret the degree of correlation g.</div>
+<div class="check">Distinguish an exact sequence from a composition.</div>
+<div class="check">Use factorial notation correctly, including 0! = 1.</div>
+<div class="check">Identify distinguishable and indistinguishable objects.</div>
+<div class="check">Derive the multiplicity formula from overcounting.</div>
+<div class="check">Use W = N!/[n!(N−n)!] for two categories.</div>
+<div class="check">Explain both pieces of the binomial distribution.</div>
+<div class="check">Calculate a binomial probability for a small N.</div>
+<div class="check">Check that a discrete distribution sums to one.</div>
+<div class="check">Calculate a discrete expected value.</div>
+<div class="check">Explain the meaning of p(x)dx for a continuous variable.</div>
+<div class="check">Normalize a continuous weight function g(x).</div>
+<div class="check">Normalize g(x) = exp(−ax) on x ≥ 0.</div>
+<div class="check">Explain why large-N systems concentrate near the most probable composition.</div>
+</div>
+<div class="callout exam">
+<div class="label">Exam Priority</div>
+<p>If time is limited, prioritize: <strong>sequence vs composition → multiplicity → binomial distribution → normalization → expected value.</strong> These ideas form the main logical chain of the lecture.</p>
+</div>
+<div class="fa" lang="fa">
+      برای امتحان فقط فرمول‌ها کافی نیستند. باید بتوانی تشخیص بدهی چرا هر فرمول استفاده می‌شود و هر جزء آن چه معنایی دارد. مهم‌ترین مهارت این جلسه انتخاب درست مدل شمارش و احتمال است.
+    </div>
+</section>
+<section class="sheet en" id="self-test">
+<h2>16. Rapid Self-Test <a class="toplink" href="#toc">Back to TOC</a></h2>
+<ol>
+<li>What is the difference between P(B) and P(B|A)?</li>
+<li>What does g = 1 mean physically?</li>
+<li>Why is HHTH different from the composition 3H,1T?</li>
+<li>Why does 3! overcount the arrangements of A, A, H?</li>
+<li>Why is the denominator 3!2! for FREEZER?</li>
+<li>For N = 4 and n = 3, calculate the multiplicity.</li>
+<li>State the binomial distribution and explain each factor.</li>
+<li>Why must the four two-trial probabilities sum to one?</li>
+<li>In the hemoglobin example, why are there exactly three possible compositions?</li>
+<li>Calculate the average of the lecture distribution with probabilities 0.1, 0.2, 0.3, 0.2, 0.2 over outcomes 1 through 5.</li>
+<li>What does p(x)dx represent?</li>
+<li>How do you normalize a non-normalized function g(x)?</li>
+<li>Normalize g(x) = exp(−ax) for x ≥ 0.</li>
+<li>What becomes more predictable as N becomes large: one exact sequence, or the overall composition?</li>
+</ol>
+<div class="callout remember">
+<div class="label">Study Method</div>
+<p>Cover the notes and answer these questions from memory. Reopen only the sections you cannot explain clearly.</p>
+</div>
+<div class="source-note">
+<strong>Source alignment:</strong> L02 lecture transcript cross-checked against <em>Molecular Driving Forces: Statistical Thermodynamics in Biology, Chemistry, Physics, and Nanoscience</em>, 2nd ed., Chapter 1. Textbook-aligned topics include conditional probability, degree of correlation, combinatorics, factorial notation, indistinguishable objects, multiplicity, the binomial distribution, probability distributions, normalization, and averages. Corrections are explicitly labeled where the transcript was clearly garbled or numerically inconsistent.
+    </div>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHEE 6335 - Lecture 04 - Heat, Work, Energy & Entropy</title>
+<style>
+:root {
+  --ink:#14213d; --muted:#5f6b7a; --line:#d9e0e8; --paper:#ffffff; --soft:#f6f8fb;
+  --accent:#1f4b7a; --accent2:#2f6f8f; --important:#fff7e6; --exam:#eef6ff;
+  --remember:#eef8f1; --mistake:#fff0f0; --fa-bg:#fafbfc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#edf1f5;color:var(--ink);font-family:"Noto Sans",Arial,sans-serif;line-height:1.62}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:275px minmax(0,1fr);gap:24px;padding:24px}
+.sidebar{position:sticky;top:16px;align-self:start;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 4px 18px rgba(20,33,61,.06)}
+.sidebar h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px;color:var(--muted)}
+.sidebar ol{margin:0;padding-left:22px;font-size:13px} .sidebar li{margin:7px 0}
+main{background:var(--paper);border-radius:18px;box-shadow:0 8px 28px rgba(20,33,61,.08);overflow:hidden}
+.hero{padding:54px 58px 42px;background:linear-gradient(135deg,#f7faff 0%,#eef5fa 100%);border-bottom:1px solid var(--line)}
+.kicker{text-transform:uppercase;letter-spacing:.12em;font-weight:700;font-size:12px;color:var(--accent2)}
+h1{font-size:36px;line-height:1.14;margin:10px 0 8px;letter-spacing:-.02em}
+.subtitle{font-size:19px;color:var(--muted);margin:0}
+.hero-meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-size:12px;border:1px solid #cdd9e5;background:white;border-radius:999px;padding:6px 10px;color:#415268}
+.content{padding:34px 58px 60px}
+.mobile-toc{display:none}
+section{scroll-margin-top:18px;padding:6px 0 28px;border-bottom:1px solid #edf0f3;margin-bottom:26px}
+section:last-child{border-bottom:0}
+h2.section-title{font-size:25px;line-height:1.25;margin:0 0 18px;color:#173b61;letter-spacing:-.01em}
+h3{font-size:18px;margin:24px 0 10px;color:#244f74}
+p{margin:9px 0 13px}
+ul,ol{margin:8px 0 14px 24px} li{margin:4px 0}
+.en{direction:ltr;text-align:left}
+.fa{direction:rtl;text-align:right;background:var(--fa-bg);border-right:4px solid #b8c8d8;border-radius:10px;padding:15px 18px;margin-top:15px;font-family:"Noto Sans Arabic","Noto Sans",Arial,sans-serif;line-height:1.9;color:#29384a}
+.fa-label{font-weight:700;color:#5a6c80;font-size:12px;margin-bottom:4px}
+.lang-divider{height:1px;background:linear-gradient(90deg,transparent,#cbd5df 18%,#cbd5df 82%,transparent);margin:20px 0 0}
+.eq{overflow-x:auto;text-align:center;margin:18px 0;padding:8px 2px}
+math{font-family:"STIX Math","Cambria Math",serif;font-size:1.26em}
+.eq.compact math{font-size:1.12em}
+.callout{border-radius:11px;padding:13px 15px;margin:16px 0;border:1px solid transparent}
+.callout-title{font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.callout.important{background:var(--important);border-color:#f0d99d} .important .callout-title{color:#8a5a00}
+.callout.exam{background:var(--exam);border-color:#bcd8ef} .exam .callout-title{color:#1f5d8c}
+.callout.remember{background:var(--remember);border-color:#bdddc8} .remember .callout-title{color:#2f6942}
+.callout.mistake{background:var(--mistake);border-color:#edc1c1} .mistake .callout-title{color:#9a3a3a}
+.table-wrap{overflow-x:auto;margin:14px 0 18px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{background:#edf4f8;color:#274a67;text-align:left;font-weight:700} th,td{padding:10px 12px;border:1px solid #dce4eb}
+.source-note{font-size:12px;color:var(--muted);background:#f8fafc;border:1px solid var(--line);padding:10px 12px;border-radius:8px;margin:12px 0}
+.mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.mini-card{border:1px solid var(--line);background:#fbfcfe;border-radius:10px;padding:13px}
+.mini-card strong{display:block;margin-bottom:5px;color:#294f70}
+.keyeq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.keyeq .mini-card{display:flex;align-items:center;justify-content:center;min-height:86px}
+.keyeq math{font-size:1.08em}
+.footer-note{font-size:12px;color:#6b7785;border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
+@media (max-width:900px){
+ .shell{grid-template-columns:1fr;padding:0;gap:0} .sidebar{display:none} main{border-radius:0;box-shadow:none} .hero{padding:32px 22px 27px} h1{font-size:30px} .content{padding:24px 20px 44px}
+ .mobile-toc{display:block;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:28px} .mobile-toc summary{font-weight:700;cursor:pointer} .mobile-toc ol{font-size:13px;padding-left:22px}
+ .mini-grid,.keyeq{grid-template-columns:1fr}
+}
+@media print{
+ @page{size:Letter;margin:0.62in 0.72in 0.68in}
+ body{background:#fff;font-size:10.5pt;line-height:1.48;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .shell{display:block;max-width:none;padding:0} .sidebar,.mobile-toc{display:none!important} main{box-shadow:none;border-radius:0}
+ .hero{padding:0 0 22px;background:#fff;border-bottom:2px solid #9db4c9} .hero h1{font-size:26pt} .subtitle{font-size:13pt}
+ .content{padding:20px 0 0}
+ section{break-before:auto;break-inside:auto;padding-bottom:16px;margin-bottom:15px}
+ h2.section-title{font-size:16pt;break-after:avoid} h3{font-size:12.5pt;break-after:avoid}
+ .callout,.fa,.mini-card,.table-wrap{break-inside:avoid}
+ .fa{background:#fff;border:1px solid #d7dfe7;border-right:4px solid #aebdcc;padding:11px 13px}
+ .eq{break-inside:avoid;margin:12px 0} math{font-size:1.16em}
+ a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" aria-label="Table of Contents">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#notation">Notation & Symbols</a></li>
+    <li><a href="#s1">Lecture Roadmap</a></li>
+    <li><a href="#s2">Energy</a></li>
+    <li><a href="#s3">First Law & Sign Convention</a></li>
+    <li><a href="#s4">Work: Spring Model</a></li>
+    <li><a href="#s5">Elastic & Kinetic Energy</a></li>
+    <li><a href="#s6">State Function & Path Dependence</a></li>
+    <li><a href="#s7">Extensive vs Intensive</a></li>
+    <li><a href="#s8">What Is Heat?</a></li>
+    <li><a href="#s9">Multiplicity & Heat Flow</a></li>
+    <li><a href="#s10">Three-Particle Energy Model</a></li>
+    <li><a href="#s11">Two Systems: Initial State</a></li>
+    <li><a href="#s12">Energy Redistribution</a></li>
+    <li><a href="#s13">Energy Does Not Always Flow Downhill</a></li>
+    <li><a href="#s14">Temperature as Driving Force</a></li>
+    <li><a href="#s15">Boltzmann Entropy</a></li>
+    <li><a href="#s16">Why the Logarithm?</a></li>
+    <li><a href="#s17">Boltzmann Constant</a></li>
+    <li><a href="#s18">Gibbs Entropy</a></li>
+    <li><a href="#s19">Stirling Approximation</a></li>
+    <li><a href="#s20">Boltzmann → Gibbs Derivation</a></li>
+    <li><a href="#s21">Negative Sign & Positivity</a></li>
+    <li><a href="#s22">Second-Law Synthesis</a></li>
+    <li><a href="#key-equations">Key Equations</a></li>
+    <li><a href="#exam">What I Need to Know for the Exam</a></li>
+  </ol>
+</aside>
+<main>
+<header class="hero" dir="ltr">
+  <div class="kicker">CHEE 6335 · Lecture 04</div>
+  <h1>Heat, Work, Energy & Entropy</h1>
+  <p class="subtitle">Master Notes · Study-Friendly · OneNote / Printout Edition</p>
+  <div class="hero-meta"><span class="chip">Source: Lecture 04 transcript</span><span class="chip">Textbook alignment: Chapters 3 & 5</span><span class="chip">English LTR · Persian RTL</span></div>
+</header>
+<div class="content">
+<details class="mobile-toc"><summary>Table of Contents</summary>
+<ol><li><a href="#notation">Notation & Symbols</a></li><li><a href="#s1">Lecture Roadmap</a></li><li><a href="#s2">Energy</a></li><li><a href="#s3">First Law & Sign Convention</a></li><li><a href="#s4">Work: Spring Model</a></li><li><a href="#s5">Elastic & Kinetic Energy</a></li><li><a href="#s6">State Function & Path Dependence</a></li><li><a href="#s7">Extensive vs Intensive</a></li><li><a href="#s8">What Is Heat?</a></li><li><a href="#s9">Multiplicity & Heat Flow</a></li><li><a href="#s10">Three-Particle Energy Model</a></li><li><a href="#s11">Two Systems: Initial State</a></li><li><a href="#s12">Energy Redistribution</a></li><li><a href="#s13">Energy Does Not Always Flow Downhill</a></li><li><a href="#s14">Temperature as Driving Force</a></li><li><a href="#s15">Boltzmann Entropy</a></li><li><a href="#s16">Why the Logarithm?</a></li><li><a href="#s17">Boltzmann Constant</a></li><li><a href="#s18">Gibbs Entropy</a></li><li><a href="#s19">Stirling Approximation</a></li><li><a href="#s20">Boltzmann → Gibbs Derivation</a></li><li><a href="#s21">Negative Sign & Positivity</a></li><li><a href="#s22">Second-Law Synthesis</a></li><li><a href="#key-equations">Key Equations</a></li><li><a href="#exam">Exam Checklist</a></li></ol></details>
+
+<section id="notation"><h2 class="section-title">Notation & Symbols</h2><div class="en" dir="ltr">
+<div class="table-wrap"><table><thead><tr><th>Symbol</th><th>Meaning in this lecture</th></tr></thead><tbody>
+<tr><td><math><mi>U</mi></math></td><td>Internal energy</td></tr><tr><td><math><mi>Q</mi></math></td><td>Heat transferred into the system under the class sign convention</td></tr><tr><td><math><mi>W</mi></math></td><td>Work when used in the First Law; multiplicity when used in statistical counting. Context distinguishes them.</td></tr>
+<tr><td><math><mi>F</mi></math></td><td>Force</td></tr><tr><td><math><mi>k</mi></math></td><td>Spring constant in the spring model; Boltzmann constant in entropy equations. Context distinguishes them.</td></tr>
+<tr><td><math><mi>x</mi></math></td><td>Spring displacement</td></tr><tr><td><math><msub><mi>ε</mi><mi>i</mi></msub></math></td><td>Energy of level <math><mi>i</mi></math></td></tr><tr><td><math><msub><mi>N</mi><mi>i</mi></msub></math></td><td>Number of particles in energy level <math><mi>i</mi></math></td></tr>
+<tr><td><math><mi>S</mi></math></td><td>Entropy</td></tr><tr><td><math><msub><mi>p</mi><mi>i</mi></msub></math></td><td>Probability of state <math><mi>i</mi></math></td></tr><tr><td><math><mi>N</mi></math></td><td>Total number of particles or trials</td></tr><tr><td><math><msub><mi>N</mi><mi>A</mi></msub></math></td><td>Avogadro’s number</td></tr><tr><td><math><mi>R</mi></math></td><td>Universal gas constant</td></tr>
+</tbody></table></div>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>The symbol <strong>W</strong> is used in two different ways in this lecture: work in the First Law and multiplicity in statistical counting. Read the surrounding context before interpreting it.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در این جلسه بعضی نمادها بیش از یک معنی دارند. مهم‌ترین مورد نماد دبلیو است که یک‌بار برای کار و یک‌بار برای تعداد حالت‌های میکروسکوپی استفاده می‌شود. معنی درست را باید از متن اطراف رابطه تشخیص داد.</p></div></section>
+
+<section id="s1"><h2 class="section-title">1. Lecture Roadmap</h2><div class="en" dir="ltr">
+<p>The lecture links energy transfer to the multiplicity principle developed previously.</p>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtext>Energy</mtext><mo>→</mo><mtext>Heat and Work</mtext><mo>→</mo><mi>W</mi><mo>(</mo><mi>U</mi><mo>)</mo><mo>→</mo><mtext>Heat Flow</mtext><mo>→</mo><mtext>Entropy</mtext></math></div>
+<p>The central transition is from counting microstates to using entropy as the thermodynamic measure of multiplicity.</p>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>The lecture is not trying to replace the First Law. The First Law accounts for energy conservation; multiplicity explains the spontaneous direction of energy redistribution.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>این جلسه میان انتقال انرژی و اصل بیشینه شدن تعداد حالت‌های ممکن ارتباط برقرار می‌کند. قانون اول فقط حسابداری انرژی را انجام می‌دهد، اما جهت طبیعی انتقال انرژی از اصل افزایش تعداد حالت‌های میکروسکوپی به دست می‌آید.</p></div></section>
+
+<section id="s2"><h2 class="section-title">2. Energy</h2><div class="en" dir="ltr">
+<p><strong>Energy is the capacity to produce heat and work.</strong></p>
+<p>Energy is treated as a property of a system. Heat and work describe ways by which energy is transferred across the system boundary.</p>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>Energy belongs to the state of the system. Heat and work refer to transfer processes.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>انرژی ویژگی خود سیستم است. گرما و کار دو روش انتقال انرژی میان سیستم و محیط هستند. بنابراین گرما و کار را نباید به عنوان ویژگی ذخیره‌شده داخل سیستم در نظر گرفت.</p></div></section>
+
+<section id="s3"><h2 class="section-title">3. First Law of Thermodynamics & Sign Convention</h2><div class="en" dir="ltr">
+<p>The class uses the following convention:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>ΔU</mi><mo>=</mo><mi>Q</mi><mo>+</mo><mi>W</mi></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>Q</mi><mo>></mo><mn>0</mn><mtext> : heat enters the system</mtext></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>></mo><mn>0</mn><mtext> : work is done on the system</mtext></math></div>
+<p>A positive change in internal energy can result from heat entering the system, work being done on the system, or both.</p>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Use the sign convention of this course: positive work means work done <em>on</em> the system.</p></aside>
+<aside class="callout mistake" dir="ltr"><div class="callout-title">Common Mistake</div><p>Do not switch mid-problem to a convention in which positive work means work done by the system.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در قرارداد علامت این درس، گرمای واردشده به سیستم مثبت است و کاری که روی سیستم انجام می‌شود نیز مثبت است. اگر از قرارداد دیگری استفاده شود، علامت کار عوض می‌شود؛ بنابراین در حل تمرین باید قرارداد همین کلاس ثابت نگه داشته شود.</p></div></section>
+
+<section id="s4"><h2 class="section-title">4. Work: Spring Model</h2><div class="en" dir="ltr">
+<p>For a stretched spring, the restoring force is opposite to the displacement:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>F</mi><mtext>spring</mtext></msub><mo>=</mo><mo>−</mo><mi>k</mi><mi>x</mi></math></div>
+<p>To hold the ball in equilibrium, the operator applies the opposite force:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>F</mi><mtext>op</mtext></msub><mo>=</mo><mo>−</mo><msub><mi>F</mi><mtext>spring</mtext></msub><mo>=</mo><mi>k</mi><mi>x</mi></math></div>
+<p>The work done by the operator on the system is:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>=</mo><msubsup><mo>∫</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub></msubsup><msub><mi>F</mi><mtext>op</mtext></msub><mo>⁢</mo><mi>d</mi><mi>x</mi></math></div>
+<p>Substitution gives:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>=</mo><msubsup><mo>∫</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub></msubsup><mi>k</mi><mi>x</mi><mo>⁢</mo><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mi>k</mi><mn>2</mn></mfrac><mrow><mo>(</mo><msup><msub><mi>x</mi><mn>2</mn></msub><mn>2</mn></msup><mo>−</mo><msup><msub><mi>x</mi><mn>1</mn></msub><mn>2</mn></msup><mo>)</mo></mrow></math></div>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>This derivation is about <strong>work done on the system</strong>, which is why the operator force is used.</p></aside>
+<aside class="callout mistake" dir="ltr"><div class="callout-title">Common Mistake</div><p>The board discussion contained several sign corrections. The consistent result for stretching from <math><msub><mi>x</mi><mn>1</mn></msub></math> to <math><msub><mi>x</mi><mn>2</mn></msub></math> is shown above.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>نیروی فنر در خلاف جهت کشیدگی عمل می‌کند. برای نگه داشتن جسم در تعادل، نیروی خارجی باید خلاف نیروی فنر باشد. انتگرال نیروی خارجی نسبت به جابه‌جایی مقدار کاری را می‌دهد که روی سیستم انجام شده است.</p><p>در تخته‌ی کلاس چند بار علامت منفی اصلاح شد. رابطه‌ی نهایی بالا همان رابطه‌ی سازگار با تعریف کار انجام‌شده روی سیستم است.</p></div></section>
+
+<section id="s5"><h2 class="section-title">5. Elastic Potential Energy & Kinetic Energy</h2><div class="en" dir="ltr">
+<h3>Elastic potential energy</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>E</mi><mtext>elastic</mtext></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>k</mi><msup><mi>x</mi><mn>2</mn></msup></math></div><p>The spring energy depends on position, so it is a potential energy.</p>
+<h3>Kinetic energy</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>E</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>m</mi><msup><mi>v</mi><mn>2</mn></msup></math></div><p>Kinetic energy depends on particle motion.</p>
+<aside class="callout mistake" dir="ltr"><div class="callout-title">Common Mistake</div><p>For kinetic-theory averages, distinguish <math><mrow><mo>⟨</mo><msup><mi>v</mi><mn>2</mn></msup><mo>⟩</mo></mrow></math> from <math><msup><mrow><mo>⟨</mo><mi>v</mi><mo>⟩</mo></mrow><mn>2</mn></msup></math>. The textbook relation uses the average of the squared speed.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>انرژی کشسانی به میزان تغییر شکل فنر وابسته است و به همین دلیل یک انرژی پتانسیل محسوب می‌شود. انرژی جنبشی به حرکت ذره وابسته است.</p><p>در میانگین‌گیری مربوط به حرکت ذرات باید میانگین مربع سرعت را از مربع میانگین سرعت جدا دانست. این دو در حالت کلی یکسان نیستند.</p></div></section>
+
+<section id="s6"><h2 class="section-title">6. Internal Energy as a State Function</h2><div class="en" dir="ltr">
+<p>Internal energy depends only on the initial and final states:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>ΔU</mi><mo>=</mo><msub><mi>U</mi><mi>B</mi></msub><mo>−</mo><msub><mi>U</mi><mi>A</mi></msub></math></div>
+<p>Heat and work can depend on the pathway taken between the same two states.</p>
+<div class="mini-grid"><div class="mini-card"><strong>State function</strong><span>Internal energy</span></div><div class="mini-card"><strong>Path dependent</strong><span>Heat and work</span></div></div>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Different pathways can have different values of heat and work, while their sum must match the same internal-energy change.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>انرژی داخلی فقط به حالت آغازین و پایانی بستگی دارد. اما گرما و کار می‌توانند با تغییر مسیر فرایند تغییر کنند. با وجود این، مجموع آن‌ها باید همان تغییر انرژی داخلی را ایجاد کند.</p></div></section>
+
+<section id="s7"><h2 class="section-title">7. Extensive and Intensive Properties</h2><div class="en" dir="ltr">
+<div class="mini-grid"><div class="mini-card"><strong>Extensive property</strong><p>Scales with system size.</p><div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>→</mo><mn>2</mn><mi>N</mi><mspace width="1.3em"/><mo>⇒</mo><mspace width="1.3em"/><mi>U</mi><mo>→</mo><mn>2</mn><mi>U</mi></math></div></div>
+<div class="mini-card"><strong>Intensive property</strong><p>Does not scale with system size.</p><div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi><mspace width=".6em"/><mtext>does not double when system size doubles</mtext></math></div></div></div>
+<p>Internal energy is extensive. Temperature is intensive.</p>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>خاصیت گسترده با اندازه‌ی سیستم متناسب است. اگر مقدار ماده در همان حالت دو برابر شود، انرژی کل نیز دو برابر می‌شود.</p><p>خاصیت شدتی با اندازه‌ی سیستم متناسب نیست. دما نمونه‌ی اصلی این نوع خاصیت است.</p></div></section>
+
+<section id="s8"><h2 class="section-title">8. What Is Heat? Historical Model and Evidence</h2><div class="en" dir="ltr">
+<p>Heat was historically treated as a conserved fluid-like substance. The lecture reviews observations that reject this interpretation.</p>
+<h3>8.1 Heat capacity</h3><p>Different materials take up different amounts of heat for the same temperature change.</p><div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>C</mi><mi>p</mi></msub><mo>≈</mo><mn>4.18</mn><mspace width=".4em"/><mfrac><mtext>J</mtext><mrow><mtext>g</mtext><mo>·</mo><mtext>K</mtext></mrow></mfrac><mspace width=".5em"/><mtext>for water, as used in class</mtext></math></div>
+<div class="source-note">Source note: the transcript contains conflicting numerical statements for mercury heat capacity. The lecture's qualitative comparison is retained here without assigning a mercury value.</div>
+<h3>8.2 Latent heat</h3><div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtext>liquid water</mtext><mspace width=".5em"/><mn>100</mn><mo>°</mo><mtext>C</mtext><mo>→</mo><mtext>water vapor</mtext><mspace width=".5em"/><mn>100</mn><mo>°</mo><mtext>C</mtext></math></div>
+<div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>ΔH</mi><mtext>vap</mtext></msub><mo>≈</mo><mn>40</mn><mspace width=".4em"/><mfrac><mtext>kJ</mtext><mtext>mol</mtext></mfrac></math></div>
+<p>Energy can be absorbed during a phase change without a temperature increase.</p>
+<h3>8.3 Radiative heat transfer</h3><p>Radiative energy transfer can occur through vacuum.</p>
+<h3>8.4 Class side calculation</h3><div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>1000</mn><mspace width=".3em"/><mtext>g</mtext></mrow><mrow><mn>18</mn><mspace width=".3em"/><mtext>g mol</mtext><msup><mtext></mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>≈</mo><mn>55.5</mn><mspace width=".4em"/><mtext>mol</mtext></math></div>
+<p>Using a water density of about 1 g/mL, one liter of pure water contains about 55.5 mol.</p>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>Heat is a mode of energy transfer. It is not a conserved material fluid.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در گذشته گرما مانند یک سیال فرض می‌شد. تفاوت ظرفیت گرمایی مواد، وجود گرمای نهان در تغییر فاز و انتقال تابشی در خلأ با این تصور سازگار نیستند.</p><p>در محاسبه‌ی جانبی کلاس نیز نشان داده شد که یک لیتر آب تقریباً پنجاه و پنج و نیم مول آب دارد.</p></div></section>
+
+<section id="s9"><h2 class="section-title">9. Multiplicity as the Driver of Heat Exchange</h2><div class="en" dir="ltr">
+<p>The previous lecture used maximum multiplicity to explain gas expansion, mixing, chemical-potential behavior, and rubber elasticity.</p>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>↑</mo><mspace width=".5em"/><mo>⇒</mo><mspace width=".5em"/><mtext>more probable macrostate</mtext></math></div>
+<p>Lecture 04 applies the same principle to energy exchange.</p>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>The question is not only how much energy a system has, but how many microstates are compatible with that energy.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>اصل اصلی این است که حالت ماکروسکوپی با تعداد حالت‌های میکروسکوپی بیشتر، احتمال بیشتری دارد. این جلسه همین ایده را برای توزیع انرژی میان ذرات و سپس میان دو سیستم به کار می‌برد.</p></div></section>
+
+<section id="s10"><h2 class="section-title">10. Three-Particle Energy-Level Model</h2><div class="en" dir="ltr">
+<p>Three distinguishable particles can occupy discrete energy levels.</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>U</mi><mo>=</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>N</mi><mi>i</mi></msub><msub><mi>ε</mi><mi>i</mi></msub></math></div>
+<p>For the simple energy levels used in class, the multiplicities are:</p>
+<div class="table-wrap"><table><thead><tr><th>Total energy</th><th>Multiplicity</th><th>Representative partitions</th></tr></thead><tbody>
+<tr><td>0</td><td>1</td><td>0 + 0 + 0</td></tr><tr><td>1</td><td>3</td><td>1 + 0 + 0</td></tr><tr><td>2</td><td>6</td><td>2 + 0 + 0; 1 + 1 + 0</td></tr><tr><td>3</td><td>10</td><td>3 + 0 + 0; 2 + 1 + 0; 1 + 1 + 1</td></tr></tbody></table></div>
+<p>For total energy 3:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>(</mo><mi>U</mi><mo>=</mo><mn>3</mn><mo>)</mo><mo>=</mo><mn>3</mn><mo>+</mo><mn>6</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>10</mn></math></div>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Be able to explain why the partition 2 + 1 + 0 gives six microstates for three distinguishable particles.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در این مدل سه ذره‌ی قابل تشخیص داریم. برای یک انرژی کل مشخص، انرژی می‌تواند به چند روش میان ذرات تقسیم شود. هر آرایش جداگانه یک حالت میکروسکوپی است.</p><p>برای انرژی کل سه، سه نوع تقسیم اصلی وجود دارد و مجموع تعداد آرایش‌های آن‌ها برابر ده است.</p></div></section>
+
+<section id="s11"><h2 class="section-title">11. Two Systems in Thermal Contact: Initial State</h2><div class="en" dir="ltr">
+<p>Each system contains 10 distinguishable particles, and each particle can have energy 0 or 1.</p>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>(</mo><mi>U</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mi>U</mi><mo>!</mo><mrow><mo>(</mo><mn>10</mn><mo>−</mo><mi>U</mi><mo>)</mo></mrow><mo>!</mo></mrow></mfrac></math></div>
+<p>Initial energies:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>U</mi><mi>A</mi></msub><mo>=</mo><mn>2</mn><mspace width="1.5em"/><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>4</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>A</mi></msub><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mn>2</mn><mo>!</mo><mn>8</mn><mo>!</mo></mrow></mfrac><mo>=</mo><mn>45</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>B</mi></msub><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mn>4</mn><mo>!</mo><mn>6</mn><mo>!</mo></mrow></mfrac><mo>=</mo><mn>210</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><msub><mi>W</mi><mi>A</mi></msub><msub><mi>W</mi><mi>B</mi></msub></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><mn>45</mn><mo>×</mo><mn>210</mn><mo>=</mo><mn>9450</mn></math></div>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>هر سیستم ده ذره دارد و هر ذره فقط می‌تواند در تراز انرژی صفر یا یک باشد. بنابراین شمارش حالت‌ها به یک مسئله‌ی دوجمله‌ای تبدیل می‌شود.</p><p>در حالت اولیه، ضرب تعداد حالت‌های دو زیرسیستم برابر نه هزار و چهارصد و پنجاه است.</p></div></section>
+
+<section id="s12"><h2 class="section-title">12. Energy Redistribution and Total Multiplicity</h2><div class="en" dir="ltr">
+<h3>More equal distribution</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>U</mi><mi>A</mi></msub><mo>=</mo><mn>3</mn><mspace width="1.5em"/><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>3</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mi>A</mi></msub><mo>=</mo><msub><mi>W</mi><mi>B</mi></msub><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mn>3</mn><mo>!</mo><mn>7</mn><mo>!</mo></mrow></mfrac><mo>=</mo><mn>120</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><mn>120</mn><mo>×</mo><mn>120</mn><mo>=</mo><mn>14400</mn></math></div>
+<h3>More unequal distribution</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>U</mi><mi>A</mi></msub><mo>=</mo><mn>1</mn><mspace width="1.5em"/><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>5</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><mn>10</mn><mo>×</mo><mn>252</mn><mo>=</mo><mn>2520</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mn>2520</mn><mo>&lt;</mo><mn>9450</mn><mo>&lt;</mo><mn>14400</mn></math></div>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>For these two equal-sized model systems, the energy distribution 3 and 3 has the largest multiplicity among the cases tested.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>با جابه‌جایی انرژی میان دو سیستم، انرژی کل ثابت می‌ماند اما تعداد حالت‌های کل تغییر می‌کند. تقسیم سه و سه بیشترین تعداد حالت را در میان حالت‌های بررسی‌شده دارد.</p><p>تقسیم بسیار نامساوی یک و پنج تعداد حالت‌های بسیار کمتری ایجاد می‌کند و در نتیجه احتمال کمتری دارد.</p></div></section>
+
+<section id="s13"><h2 class="section-title">13. Energy Does Not Always Flow "Downhill"</h2><div class="en" dir="ltr">
+<p>Now compare systems with different particle numbers but the same initial energy.</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>N</mi><mi>A</mi></msub><mo>=</mo><mn>10</mn><mspace width="1.5em"/><msub><mi>N</mi><mi>B</mi></msub><mo>=</mo><mn>4</mn></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>U</mi><mi>A</mi></msub><mo>=</mo><mn>2</mn><mspace width="1.5em"/><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>2</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>initial</mtext></msub><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mn>2</mn><mo>!</mo><mn>8</mn><mo>!</mo></mrow></mfrac><mfrac><mrow><mn>4</mn><mo>!</mo></mrow><mrow><mn>2</mn><mo>!</mo><mn>2</mn><mo>!</mo></mrow></mfrac><mo>=</mo><mn>45</mn><mo>×</mo><mn>6</mn><mo>=</mo><mn>270</mn></math></div>
+<p>Transfer one energy unit from the smaller system to the larger system:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>U</mi><mi>A</mi></msub><mo>=</mo><mn>3</mn><mspace width="1.5em"/><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>1</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>final</mtext></msub><mo>=</mo><mfrac><mrow><mn>10</mn><mo>!</mo></mrow><mrow><mn>3</mn><mo>!</mo><mn>7</mn><mo>!</mo></mrow></mfrac><mfrac><mrow><mn>4</mn><mo>!</mo></mrow><mrow><mn>1</mn><mo>!</mo><mn>3</mn><mo>!</mo></mrow></mfrac><mo>=</mo><mn>120</mn><mo>×</mo><mn>4</mn><mo>=</mo><mn>480</mn></math></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mn>480</mn><mo>></mo><mn>270</mn></math></div>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>This example proves that equal internal energies do not define thermal equilibrium when the systems are different.</p></aside>
+<aside class="callout mistake" dir="ltr"><div class="callout-title">Common Mistake</div><p>The transcript briefly says <math><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>3</mn></math> at this point. Conservation of total energy and the subsequent multiplicity calculation require <math><msub><mi>U</mi><mi>B</mi></msub><mo>=</mo><mn>1</mn></math>. The corrected value is used here.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>دو سیستم می‌توانند انرژی داخلی یکسان داشته باشند ولی در تعادل گرمایی نباشند. در مثال کلاس، انتقال یک واحد انرژی از سیستم کوچک‌تر به سیستم بزرگ‌تر تعداد حالت‌های کل را افزایش می‌دهد.</p><p>در متن پیاده‌شده یک مقدار به اشتباه سه گفته شده است. با حفظ انرژی کل و با توجه به محاسبه‌ی بعدی، مقدار درست یک است.</p></div></section>
+
+<section id="s14"><h2 class="section-title">14. Temperature as the Driving Force for Energy Exchange</h2><div class="en" dir="ltr">
+<p>The lecture emphasizes that the tendency is toward equal temperatures, not necessarily equal internal energies.</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtext>heat-flow direction</mtext><mspace width=".5em"/><mo>↔</mo><mspace width=".5em"/><mtext>temperature</mtext></math></div>
+<p>The professor previews a later result in which reciprocal temperature acts as a thermodynamic driving-force quantity in energy space:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1</mn><mi>T</mi></mfrac></math></div>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>Internal energy alone does not predict the direction of heat flow.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>جهت انتقال گرما را نمی‌توان فقط از مقایسه‌ی انرژی داخلی تعیین کرد. کمیتی که برای تعادل گرمایی اهمیت دارد دما است. استاد اشاره کرد که در ادامه‌ی درس معکوس دما در بیان نیروی محرک انتقال انرژی ظاهر می‌شود.</p></div></section>
+
+<section id="s15"><h2 class="section-title">15. Boltzmann Definition of Entropy</h2><div class="en" dir="ltr">
+<p>The lecture introduces entropy through the Boltzmann relation:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mi>k</mi><mi>ln</mi><mi>W</mi></math></div>
+<p>Rudolf Clausius introduced the term entropy; Boltzmann and Gibbs developed the statistical formulations discussed here. The class uses the natural logarithm, <strong>ln</strong>.</p>
+<p>Here, multiplicity is converted into a macroscopic thermodynamic quantity.</p>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Know this equation, know what each symbol means, and know the physical link: larger multiplicity corresponds to larger entropy.</p></aside>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>↑</mo><mspace width=".6em"/><mo>⇒</mo><mspace width=".6em"/><mi>S</mi><mo>↑</mo></math></div>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>واژه‌ی آنتروپی توسط رودلف کلاوزیوس معرفی شد و بولتزمن و گیبس در صورت‌بندی آماری آن نقش داشتند. در این درس از لگاریتم طبیعی استفاده می‌شود.</p><p>آنتروپی با لگاریتم تعداد حالت‌های میکروسکوپی تعریف می‌شود. هرچه تعداد حالت‌های سازگار با یک حالت ماکروسکوپی بیشتر باشد، آنتروپی نیز بیشتر است.</p></div></section>
+
+<section id="s16"><h2 class="section-title">16. Why the Logarithm?</h2><div class="en" dir="ltr">
+<p>For independent subsystems:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><msub><mi>W</mi><mi>A</mi></msub><msub><mi>W</mi><mi>B</mi></msub></math></div>
+<p>Taking the logarithm converts multiplication into addition:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>ln</mi><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><mi>ln</mi><msub><mi>W</mi><mi>A</mi></msub><mo>+</mo><mi>ln</mi><msub><mi>W</mi><mi>B</mi></msub></math></div>
+<p>Therefore:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>S</mi><mtext>total</mtext></msub><mo>=</mo><msub><mi>S</mi><mi>A</mi></msub><mo>+</mo><msub><mi>S</mi><mi>B</mi></msub></math></div>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>The logarithm makes entropy additive for independent subsystems, which is the required extensive behavior.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>تعداد حالت‌های دو زیرسیستم مستقل در هم ضرب می‌شود. لگاریتم این ضرب را به جمع تبدیل می‌کند. به همین دلیل آنتروپی کل می‌تواند از جمع آنتروپی زیرسیستم‌ها به دست آید.</p></div></section>
+
+<section id="s17"><h2 class="section-title">17. Boltzmann Constant</h2><div class="en" dir="ltr">
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>≈</mo><mn>1.38</mn><mo>×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>23</mn></mrow></msup><mspace width=".4em"/><mfrac><mtext>J</mtext><mtext>K</mtext></mfrac></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mfrac><mi>R</mi><msub><mi>N</mi><mi>A</mi></msub></mfrac></math></div>
+<div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>R</mi><mo>≈</mo><mn>8.314</mn><mspace width=".4em"/><mfrac><mtext>J</mtext><mrow><mtext>mol</mtext><mo>·</mo><mtext>K</mtext></mrow></mfrac></math></div>
+<div class="eq compact" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>N</mi><mi>A</mi></msub><mo>≈</mo><mn>6.022</mn><mo>×</mo><msup><mn>10</mn><mn>23</mn></msup><mspace width=".4em"/><msup><mtext>mol</mtext><mrow><mo>−</mo><mn>1</mn></mrow></msup></math></div>
+<p>Standard notation often writes the Boltzmann constant as <math><msub><mi>k</mi><mi>B</mi></msub></math>. The professor uses <math><mi>k</mi></math> in this course.</p>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>The professor expects the gas constant and Avogadro’s number to be familiar quantities.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>ثابت بولتزمن عامل تبدیل میان شمارش حالت‌های میکروسکوپی و واحد فیزیکی آنتروپی است. این ثابت از تقسیم ثابت جهانی گازها بر عدد آووگادرو به دست می‌آید.</p><p>در بسیاری از منابع برای این ثابت از نمادی با زیرنویس استفاده می‌شود، اما استاد در این درس نماد ساده‌تر را به کار می‌برد.</p></div></section>
+
+<section id="s18"><h2 class="section-title">18. Gibbs Definition of Entropy</h2><div class="en" dir="ltr">
+<p>For states indexed by <math><mi>i</mi></math>:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mi>i</mi></msub><mi>N</mi></mfrac></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>n</mi><mi>i</mi></msub><mo>=</mo><mi>N</mi></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mn>1</mn></math></div>
+<p>The probability form stated in the lecture is:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mi>S</mi><mi>k</mi></mfrac><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+<p>Using the textbook’s notation for total entropy <math><msub><mi>S</mi><mi>N</mi></msub></math>:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><msub><mi>S</mi><mi>N</mi></msub><mrow><mi>N</mi><mi>k</mi></mrow></mfrac><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+<div class="source-note">Notation clarification from the textbook: <math><msub><mi>S</mi><mi>N</mi></msub></math> denotes total entropy for <math><mi>N</mi></math> trials, while the entropy per trial is <math><mi>S</mi><mo>=</mo><msub><mi>S</mi><mi>N</mi></msub><mo>/</mo><mi>N</mi></math>. The lecture transcript moves between these notations informally.</div>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Know how <math><msub><mi>p</mi><mi>i</mi></msub></math> is obtained from counts and why the probabilities sum to one.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در فرم گیبس، به جای شمارش مستقیم حالت‌ها از احتمال هر حالت استفاده می‌شود. احتمال هر حالت از تقسیم تعداد ذرات آن حالت بر تعداد کل ذرات به دست می‌آید و مجموع همه‌ی احتمال‌ها برابر یک است.</p><p>کتاب میان آنتروپی کل و آنتروپی به ازای هر تکرار تمایز نمادی روشن‌تری ایجاد می‌کند. این تفکیک برای جلوگیری از ابهام در جزوه حفظ شده است.</p></div></section>
+
+<section id="s19"><h2 class="section-title">19. Stirling Approximation</h2><div class="en" dir="ltr">
+<p>For large factorials, the lecture introduces:</p><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>!</mo><mo>≈</mo><msup><mrow><mo>(</mo><mfrac><mi>N</mi><mi>e</mi></mfrac><mo>)</mo></mrow><mi>N</mi></msup></math></div>
+<p>The professor presents this as a large-number approximation and notes that thermodynamic particle counts are vastly larger than the classroom examples.</p>
+<aside class="callout remember" dir="ltr"><div class="callout-title">Remember</div><p>Stirling’s approximation is the algebraic tool that makes the multiplicity-to-entropy derivation manageable for large particle numbers.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>فاکتوریل تعداد بسیار بزرگی از ذرات به سرعت غیرقابل محاسبه می‌شود. تقریب استرلینگ فاکتوریل را به شکلی تبدیل می‌کند که بتوان لگاریتم و ساده‌سازی‌های بعدی را انجام داد.</p></div></section>
+
+<section id="s20"><h2 class="section-title">20. Derivation: Boltzmann Form to Gibbs Form</h2><div class="en" dir="ltr">
+<h3>Step 1 - Multiplicity</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>=</mo><mfrac><mrow><mi>N</mi><mo>!</mo></mrow><mrow><msub><mi>n</mi><mn>1</mn></msub><mo>!</mo><msub><mi>n</mi><mn>2</mn></msub><mo>!</mo><mo>⋯</mo><msub><mi>n</mi><mi>t</mi></msub><mo>!</mo></mrow></mfrac></math></div>
+<h3>Step 2 - Apply Stirling</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>≈</mo><mfrac><msup><mi>N</mi><mi>N</mi></msup><mrow><msup><msub><mi>n</mi><mn>1</mn></msub><msub><mi>n</mi><mn>1</mn></msub></msup><msup><msub><mi>n</mi><mn>2</mn></msub><msub><mi>n</mi><mn>2</mn></msub></msup><mo>⋯</mo><msup><msub><mi>n</mi><mi>t</mi></msub><msub><mi>n</mi><mi>t</mi></msub></msup></mrow></mfrac></math></div>
+<p>The factors containing <math><mi>e</mi></math> cancel because the state counts satisfy the total-number constraint.</p>
+<h3>Step 3 - Introduce probabilities</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mi>i</mi></msub><mi>N</mi></mfrac></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>W</mi><mo>=</mo><mfrac><mn>1</mn><mrow><msup><msub><mi>p</mi><mn>1</mn></msub><msub><mi>n</mi><mn>1</mn></msub></msup><msup><msub><mi>p</mi><mn>2</mn></msub><msub><mi>n</mi><mn>2</mn></msub></msup><mo>⋯</mo><msup><msub><mi>p</mi><mi>t</mi></msub><msub><mi>n</mi><mi>t</mi></msub></msup></mrow></mfrac></math></div>
+<h3>Step 4 - Take the logarithm</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>ln</mi><mi>W</mi><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>n</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+<h3>Step 5 - Use the probability definition</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>n</mi><mi>i</mi></msub><mo>=</mo><mi>N</mi><msub><mi>p</mi><mi>i</mi></msub></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1</mn><mi>N</mi></mfrac><mi>ln</mi><mi>W</mi><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+<h3>Step 6 - Use the Boltzmann definition</h3><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><msub><mi>S</mi><mi>N</mi></msub><mrow><mi>N</mi><mi>k</mi></mrow></mfrac><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam</div><p>Do not memorize only the final line. Be able to explain the logic: multinomial counting → Stirling → probability substitution → logarithm → entropy.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>این استنتاج یکی از مهم‌ترین بخش‌های جلسه است. ابتدا تعداد آرایش‌ها با فرمول چندجمله‌ای نوشته می‌شود. سپس تقریب استرلینگ فاکتوریل‌ها را ساده می‌کند. با معرفی احتمال هر حالت، رابطه به صورت حاصل‌ضرب توان‌های احتمال نوشته می‌شود. لگاریتم حاصل‌ضرب را به جمع تبدیل می‌کند و در پایان تعریف بولتزمن، رابطه‌ی گیبس را به دست می‌دهد.</p></div></section>
+
+<section id="s21"><h2 class="section-title">21. Why the Negative Sign? Entropy Positivity</h2><div class="en" dir="ltr">
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mn>0</mn><mo>&lt;</mo><msub><mi>p</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub><mo>≤</mo><mn>0</mn></math></div><div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub><mo>≥</mo><mn>0</mn></math></div>
+<p>The lecture notes that entropy itself is nonnegative in this formulation, while an entropy change may be negative for a subsystem.</p>
+<aside class="callout mistake" dir="ltr"><div class="callout-title">Common Mistake</div><p>Do not confuse the sign of entropy with the sign of an entropy change.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>چون احتمال بین صفر و یک است، لگاریتم آن صفر یا منفی می‌شود. علامت منفی جلوی مجموع باعث می‌شود مقدار آنتروپی در این تعریف منفی نباشد.</p><p>منفی شدن تغییر آنتروپی یک زیرسیستم با منفی بودن خود آنتروپی یکسان نیست.</p></div></section>
+
+<section id="s22"><h2 class="section-title">22. Second-Law Synthesis</h2><div class="en" dir="ltr">
+<p>The lecture completes the conceptual bridge started in the previous lecture:</p>
+<div class="table-wrap"><table><thead><tr><th>Degree of freedom / model variable</th><th>Multiplicity dependence</th><th>Behavior illustrated</th></tr></thead><tbody>
+<tr><td>Volume</td><td><math><mi>W</mi><mo>(</mo><mi>V</mi><mo>)</mo></math></td><td>Gas expansion / pressure</td></tr><tr><td>Composition</td><td><math><mi>W</mi><mo>(</mo><msub><mi>N</mi><mi>i</mi></msub><mo>)</mo></math></td><td>Mixing / chemical potential</td></tr><tr><td>Polymer length</td><td><math><mi>W</mi><mo>(</mo><mi>L</mi><mo>)</mo></math></td><td>Rubber elasticity</td></tr><tr><td>Internal energy</td><td><math><mi>W</mi><mo>(</mo><mi>U</mi><mo>)</mo></math></td><td>Heat exchange</td></tr>
+</tbody></table></div>
+<div class="eq" dir="ltr"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtext>maximum multiplicity</mtext><mo>↔</mo><mtext>maximum entropy</mtext></math></div>
+<aside class="callout important" dir="ltr"><div class="callout-title">Important</div><p>Entropy does not introduce a different physical tendency here. It provides a more useful mathematical representation of the maximum-multiplicity principle.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>در جلسات قبل رفتارهای مختلف با بیشینه شدن تعداد حالت‌ها توضیح داده شدند. اکنون همان اصل با آنتروپی بیان می‌شود.</p><p>در این مرحله آنتروپی یک تمایل فیزیکی جداگانه ایجاد نمی‌کند؛ بلکه روش مناسب‌تری برای نوشتن همان اصل بیشینه شدن تعداد حالت‌های میکروسکوپی است.</p></div></section>
+
+<section id="key-equations"><h2 class="section-title">23. Key Equations</h2><div class="en" dir="ltr"><div class="keyeq">
+<div class="mini-card"><math display="block"><mi>ΔU</mi><mo>=</mo><mi>Q</mi><mo>+</mo><mi>W</mi></math></div>
+<div class="mini-card"><math display="block"><msub><mi>F</mi><mtext>spring</mtext></msub><mo>=</mo><mo>−</mo><mi>k</mi><mi>x</mi></math></div>
+<div class="mini-card"><math display="block"><mi>W</mi><mo>=</mo><msubsup><mo>∫</mo><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub></msubsup><msub><mi>F</mi><mtext>op</mtext></msub><mo>⁢</mo><mi>d</mi><mi>x</mi></math></div>
+<div class="mini-card"><math display="block"><msub><mi>E</mi><mtext>elastic</mtext></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>k</mi><msup><mi>x</mi><mn>2</mn></msup></math></div>
+<div class="mini-card"><math display="block"><mi>U</mi><mo>=</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>N</mi><mi>i</mi></msub><msub><mi>ε</mi><mi>i</mi></msub></math></div>
+<div class="mini-card"><math display="block"><msub><mi>W</mi><mtext>total</mtext></msub><mo>=</mo><msub><mi>W</mi><mi>A</mi></msub><msub><mi>W</mi><mi>B</mi></msub></math></div>
+<div class="mini-card"><math display="block"><mi>S</mi><mo>=</mo><mi>k</mi><mi>ln</mi><mi>W</mi></math></div>
+<div class="mini-card"><math display="block"><mi>k</mi><mo>=</mo><mfrac><mi>R</mi><msub><mi>N</mi><mi>A</mi></msub></mfrac></math></div>
+<div class="mini-card"><math display="block"><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>n</mi><mi>i</mi></msub><mi>N</mi></mfrac></math></div>
+<div class="mini-card"><math display="block"><mi>N</mi><mo>!</mo><mo>≈</mo><msup><mrow><mo>(</mo><mfrac><mi>N</mi><mi>e</mi></mfrac><mo>)</mo></mrow><mi>N</mi></msup></math></div>
+<div class="mini-card"><math display="block"><mfrac><msub><mi>S</mi><mi>N</mi></msub><mrow><mi>N</mi><mi>k</mi></mrow></mfrac><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mi>i</mi><mi>t</mi></munderover><msub><mi>p</mi><mi>i</mi></msub><mi>ln</mi><msub><mi>p</mi><mi>i</mi></msub></math></div>
+</div></div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>این بخش برای مرور سریع فرمول‌های اصلی جلسه است. هنگام مرور امتحان، فقط دیدن فرمول کافی نیست؛ باید بتوانی معنی هر رابطه و کاربرد آن را نیز توضیح بدهی.</p></div></section>
+
+<section id="exam"><h2 class="section-title">24. What I Need to Know for the Exam</h2><div class="en" dir="ltr">
+<ol>
+<li>State the First Law using the sign convention of this class.</li>
+<li>Explain the difference between energy, heat, and work.</li>
+<li>Derive the work done on a stretched spring and handle the force signs correctly.</li>
+<li>Distinguish a state function from a path-dependent quantity.</li>
+<li>Distinguish extensive and intensive properties using internal energy and temperature.</li>
+<li>Explain why heat is not treated as a conserved material fluid.</li>
+<li>Count the microstates for the three-particle energy-level example.</li>
+<li>Calculate the multiplicities 45, 210, 120, and 252 using factorial expressions.</li>
+<li>Calculate and compare the total multiplicities 9450, 14400, and 2520.</li>
+<li>Explain the different-size-system example and why 480 is greater than 270.</li>
+<li>Explain why equal internal energies do not necessarily mean equal temperatures.</li>
+<li>State and interpret the Boltzmann entropy equation.</li>
+<li>Explain why a logarithm is used when combining independent subsystem multiplicities.</li>
+<li>Relate the Boltzmann constant to the gas constant and Avogadro’s number.</li>
+<li>Define state probabilities and verify normalization.</li>
+<li>Use Stirling’s approximation in the entropy derivation.</li>
+<li>Reproduce the logic of the Boltzmann-to-Gibbs derivation.</li>
+<li>Explain the negative sign in the Gibbs entropy expression.</li>
+<li>Connect maximum multiplicity with maximum entropy and the Second Law.</li>
+</ol>
+<aside class="callout exam" dir="ltr"><div class="callout-title">Exam Priority</div><p>If time is limited, prioritize: First-Law sign convention; multiplicity calculations for energy exchange; the different-size-system counterexample; <math><mi>S</mi><mo>=</mo><mi>k</mi><mi>ln</mi><mi>W</mi></math>; and the Stirling derivation to the Gibbs probability form.</p></aside>
+</div><div class="lang-divider" aria-hidden="true"></div>
+<div class="fa" dir="rtl" lang="fa"><div class="fa-label">توضیح فارسی</div><p>برای امتحان باید علاوه بر حفظ روابط، منطق هر مثال را بتوانی بازسازی کنی. مهم‌ترین بخش‌ها قرارداد علامت قانون اول، محاسبه‌ی تعداد حالت‌ها در تبادل انرژی، مثال سیستم‌های با اندازه‌ی متفاوت، تعریف آنتروپی و استنتاج رابطه‌ی احتمالاتی با تقریب استرلینگ هستند.</p></div></section>
+
+<div class="footer-note" dir="ltr">Source basis: CHEE 6335 Lecture 04 transcript supplied in the course project; Ken A. Dill & Sarina Bromberg, <em>Molecular Driving Forces</em>, 2nd ed., Chapter 3 (Heat, Work, & Energy) and Chapter 5 (Entropy & the Boltzmann Law). Corrections are explicitly marked where the transcript is internally inconsistent or where the textbook clarifies notation.</div>
+</div></main></div>
+</body></html>
